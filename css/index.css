@@ -387,7 +387,7 @@ td {
 }
 .content-wrap {
   width: calc(100% - 310px);
-  float: left;
+  float: right;
 }
 .content {
   width: 100%;
@@ -527,6 +527,7 @@ td {
   width: 100%;
   height: 100%;
   background-color: rgba(45,46,48,0.7);
+  background: url("http://image.hnol.net/c/2016-04/24/12/201604241243527913-167450.jpg") no-repeat center/cover;
 }
 .header-info-inner {
   position: absolute;
@@ -578,7 +579,7 @@ td {
 }
 .sidebar {
   width: 280px;
-  float: right;
+  float: left;
 }
 .sidebar .hide {
   display: none;
@@ -656,33 +657,107 @@ td {
 }
 .sidebar-ov-author__avatar_img {
   opacity: 1;
+  border-radius: 50%;
 }
 .sidebar-ov-author__avatar:hover .sidebar-ov-author__avatar_img {
-  animation: avatar-turn 0.8s both ease-out;
+  animation: avatar-shake 0.8s both ease-out;
 }
-@-moz-keyframes avatar-turn {
+@-moz-keyframes avatar-shake {
+  0% {
+    transform: scale(1);
+  }
+  10%, 20% {
+    transform: scale(0.9) rotate(3deg);
+  }
+  30%, 50%, 70%, 90% {
+    transform: scale(1.1) rotate(-3deg);
+  }
+  40%, 60%, 80% {
+    transform: scale(1.1) rotate(3deg);
+  }
   100% {
-    transform: rotate(1turn);
+    transform: scale(1);
   }
 }
-@-webkit-keyframes avatar-turn {
+@-webkit-keyframes avatar-shake {
+  0% {
+    transform: scale(1);
+  }
+  10%, 20% {
+    transform: scale(0.9) rotate(3deg);
+  }
+  30%, 50%, 70%, 90% {
+    transform: scale(1.1) rotate(-3deg);
+  }
+  40%, 60%, 80% {
+    transform: scale(1.1) rotate(3deg);
+  }
   100% {
-    transform: rotate(1turn);
+    transform: scale(1);
   }
 }
-@-o-keyframes avatar-turn {
+@-o-keyframes avatar-shake {
+  0% {
+    transform: scale(1);
+  }
+  10%, 20% {
+    transform: scale(0.9) rotate(3deg);
+  }
+  30%, 50%, 70%, 90% {
+    transform: scale(1.1) rotate(-3deg);
+  }
+  40%, 60%, 80% {
+    transform: scale(1.1) rotate(3deg);
+  }
   100% {
-    transform: rotate(1turn);
+    transform: scale(1);
   }
 }
-@keyframes avatar-turn {
+@keyframes avatar-shake {
+  0% {
+    transform: scale(1);
+  }
+  10%, 20% {
+    transform: scale(0.9) rotate(3deg);
+  }
+  30%, 50%, 70%, 90% {
+    transform: scale(1.1) rotate(-3deg);
+  }
+  40%, 60%, 80% {
+    transform: scale(1.1) rotate(3deg);
+  }
   100% {
-    transform: rotate(1turn);
+    transform: scale(1);
   }
 }
 .sidebar-ov-author__p {
   margin: 0.5rem 0 0;
   font-weight: 600;
+}
+.sidebar-ov-social {
+  padding: 0.5rem 0;
+  text-align: center;
+}
+.sidebar-ov-social__item {
+  display: inline-block;
+  margin: 0.2rem;
+  text-align: center;
+  color: #fff;
+  background-color: #a0daff;
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  transition-property: background-color;
+  transition-delay: 0s;
+  transition-timing-function: ease;
+  transition-duration: 0.2s;
+}
+.sidebar-ov-social__item:hover {
+  color: #fff;
+  background-color: #4dbaff;
+}
+.sidebar-ov-social__item--icon {
+  font-size: 1.2em;
 }
 .sidebar-ov-state {
   padding: 0.5rem 0;
@@ -1397,6 +1472,48 @@ td {
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
+.reward {
+  text-align: center;
+}
+.reward-button {
+  display: inline-block;
+  margin: 1rem 0 1.5rem;
+  border-radius: 10px;
+  padding: 0.2rem 1rem;
+  color: #fff;
+  background-color: #ff6868;
+  transition-property: background-color;
+  cursor: pointer;
+  transition-delay: 0s;
+  transition-timing-function: ease;
+  transition-duration: 0.2s;
+}
+.reward-button:hover {
+  background-color: #e45c5c;
+}
+.reward-qr {
+  display: none;
+}
+.reward-qr-alipay,
+.reward-qr-wechat {
+  display: inline-block;
+  margin: 0 2rem;
+}
+.reward-qr-alipay__img,
+.reward-qr-wechat__img {
+  width: 200px;
+  height: 200px;
+}
+.reward-qr-alipay-text,
+.reward-qr-wechat-text {
+  margin: 0.5rem 0;
+}
+.reward-qr-alipay-text {
+  color: #1caceb;
+}
+.reward-qr-wechat-text {
+  color: #3cb034;
+}
 .back2top {
   position: fixed;
   right: 0;
@@ -1462,6 +1579,14 @@ td {
   box-sizing: content-box;
   cursor: zoom-out;
   will-change: transform;
+}
+.comments {
+  margin: 1.5rem 0 0;
+  width: 100%;
+  border-radius: 5px;
+  padding: 1rem 2rem;
+  background-color: #fff;
+  float: right;
 }
 .copy-button {
   position: absolute;
