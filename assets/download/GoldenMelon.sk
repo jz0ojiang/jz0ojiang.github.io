@@ -1,0 +1,27 @@
+options:
+	#单次回血等级
+	regain: 2
+	#buff持续时间
+	time: 2 seconds
+	#单次饱食度恢复
+	beefs: 1
+	#两次之间的冷却
+	cooldown: 5 seconds
+	#失明时间
+	debufftime: 10 seconds
+
+on right click with a gold melon:
+	set {_cd} to difference between {cd.%player%.melon} and now
+	if {_cd} is less than {@cooldown}:
+		send action bar "&6&l这个食物还在冷却中!" to player
+		stop
+	else:
+		remove a gold melon from player's inventory
+		apply regeneration of tier {@regain} to the player for {@time}
+		apply blindness of tier 2 to the player for {@debufftime}
+		feed the player by {@beefs} beefs
+		set {cd.%player%.melon} to now
+on load:
+	send "[GoldenMelon] &e可食用的金西瓜 &a已加载" to console
+on unload:
+	send "[GoldenMelon] &e可食用的金西瓜 &c已卸载" to console

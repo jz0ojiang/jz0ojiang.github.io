@@ -1,0 +1,22 @@
+options:
+	#冷却时间
+	cooldown: 3 seconds
+	#虚弱时间
+	debufftimes: 5 seconds
+on right click with a fire charge:
+	if player is sneaking:
+		set {_cooldown} to difference between {cd.%player%.fireball} and now
+		if {_cooldown} is less than {@cooldown}:
+			send action bar "&c&l火焰弹冷却中" to player
+			stop
+		else:
+			remove a fire charge from player's inventory
+			shoot a fireball from the player with speed 0.001
+			apply weakness of tier 2 to the player for {@debufftimes}
+			set {cd.%player%.fireball} to now
+	else:
+		stop
+on load:
+	send "[ThrownFireball] &b丢出火焰弹 &a已加载" to console
+on unload:
+	send "[ThrownFireball] &b丢出火焰弹 &c已卸载" to console
