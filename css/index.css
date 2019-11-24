@@ -1077,6 +1077,9 @@ td {
 .post-header-meta-reading-count {
   color: #fc6423;
 }
+.post-header-meta .leancloud_visitors {
+  color: #fc6423;
+}
 .post-end {
   margin: 0 0 1rem;
   padding: 1rem 0 0;
