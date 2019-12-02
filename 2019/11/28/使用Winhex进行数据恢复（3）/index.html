@@ -1,0 +1,520 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="keywords" content="0o酱, Hello! I'm 0o酱"><meta name="description"><title>使用Winhex进行数据恢复（3） | Hello! I'm 0o酱</title><link rel="icon" href="/images/icons/pikachu_16x.png?v=1.5.4" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/pikachu_32x.png?v=1.5.4" type="image/png" sizes="32x32"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=1.5.4"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  fontawesome: {"prefix":"fa"},
+  sidebar: {"offsetTop":"30px","renderTocDepth":4},
+  header: {"scrollDownIcon":false},
+  back2top: {"enable":true},
+  reward: true,
+  fancybox: false,
+  zoom_image: {"enable":true,"mask_color":"rgba(0,0,0,0.6)"},
+  gallery_waterfall: undefined,
+  lazyload: undefined,
+  pjax: undefined,
+  external_link: {"icon":{"enable":true,"name":"external-link"}},
+  shortcuts: {"switch_post":false},
+  prompt: {"copy_success":"复制成功","copy_error":"复制失败","creative_commons":"知识共享","copy_button":"点击复制"}
+};
+
+window.CONFIG = CONFIG;</script></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav"><div class="header-nav-inner"><div class="header-nav-btn fa fa-bars"></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__a" href="/"><i class="fa fa-home"></i>首页</a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__a" href="javascript:;"><i class="fa fa-rocket"></i>索引</a><div class="header-nav-submenu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__a" href="/archives/"><i class="fa fa-folder-open"></i>归档</a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__a" href="/categories/"><i class="fa fa-th"></i>分类</a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__a" href="/tags/"><i class="fa fa-tags"></i>标签</a></div></div></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__a" href="javascript:;"><i class="fa fa-pencil"></i>日常琐事</a><div class="header-nav-submenu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__a" href="/categories/diary/"><i class="fa fa-bookmark"></i>日记</a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__a" href="/photos/"><i class="fa fa-picture-o"></i>相册</a></div></div></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__a" href="/document/"><i class="fa fa-file"></i>文档</a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__a" href="/about/"><i class="fa fa-user"></i>关于</a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__a" href="/friends/"><i class="fa fa-group"></i>友链</a></div></div></div></nav><div class="header-info"><div class="header-info-inner"><div class="header-info-title">Hello! I'm 0o酱</div><div class="header-info-subtitle">Our world is worth fighting for.</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content"><div class="post"><header class="post-header"><h1 class="post-header-title">使用Winhex进行数据恢复（3）</h1><div class="post-header-meta"><span class="post-header-meta-create"><i class="fa fa-calendar-o"></i><span>发表于 </span><span>2019-11-28</span></span><span class="post-header-meta-update"><i class="fa fa-calendar-check-o"></i><span>更新于 </span><span>2019-12-02</span></span><span class="leancloud_visitors" id="/2019/11/28/使用Winhex进行数据恢复（3）/" data-flag-title="使用Winhex进行数据恢复（3）"><i class="fa fa-eye"></i><span>阅读次数 </span><span class="leancloud-visitors-count"></span></span></div></header><div class="post-body"><h2 id="前言"><span class="heading-link">前言</span></h2><p>现在，你已经学会了简单的修复MBR，迈出了数据恢复的第一步。接下来，我们将了解到 <strong>FAT32</strong> 格式的分区是如何工作的。</p>
+<blockquote>
+<p><strong>你可以在 <span class="external-link"><a href="http://winhex.baklib.com" target="_blank" rel="noopener">http://winhex.baklib.com</a><i class="fa fa-external-link"></i></span> 中查看所有例题文件</strong></p>
+<p><strong>题库密码：im0o.top</strong></p>
+</blockquote>
+<h2 id="知识点总览"><span class="heading-link">知识点总览</span></h2><ul>
+<li>FAT32分区构成</li>
+<li>实例：导出损坏分区FAT32中的文件</li>
+<li>实例：恢复FAT32分区（手动填写FAT32分区的DBR）</li>
+<li>EBR的组成</li>
+<li>实例：恢复扩展分区中的FAT32分区</li>
+</ul>
+<a id="more"></a>
+
+<h2 id="FAT32-分区的构成"><span class="heading-link">FAT32 分区的构成</span></h2><p>​    FAT32 文件系统是从微软Windows 95 系统的 OSR2 版本开始使用的，它能够支持大于32MB小于32GB的分区。虽然第三方的格式化程序可以把超过32GB的分区格式化为FAT32，但微软自身的系统不允许将大于32GB的分区格式化为FAT32文件系统。</p>
+<p>​    FAT32文件系统由保留扇区（包含DBR以及其备份等），FAT表1，FAT表2，数据区四个部分组成，下图为其结构示意图：</p>
+<p><img src="https://i.loli.net/2019/11/29/WqJkrmV86pPcLtz.png" alt="image.png"></p>
+<h3 id="DBR及其保留扇区"><span class="heading-link">DBR及其保留扇区</span></h3><p>​    FAT32文件系统的DBR开始于其第一个扇区，由5个部分组成，分别为跳转指令、OEM代号、BPB、引导程序和结束标志，下图为一个完整的FAT32文件系统的DBR。</p>
+<p><img src="https://i.loli.net/2019/11/29/57ncXV4dvKT6L1f.png" alt="fatdbr.png"></p>
+<ol>
+<li><h4 id="跳转指令"><span class="heading-link">跳转指令</span></h4><p>跳转指令本身占用2字节，它将程序执行流程跳转到引导程序处。</p>
+<p>当前DBR中的<code>EB 58</code>代表汇编语言中的<code>JMP 58</code>。需注意，该指令本身占用了2字节，计算跳转目标地址时应该以该指令的下一字节为基准，所以执行下一条指令应该位于<code>5A</code>处，紧接着跳转指令的是一条空指令NOP(<code>90H</code>)。</p>
+<p>由此跳转指令中第二个字节内容可以知道OEM代号与BPB参数的大小，FAT32分区即为90开始向下5行+8个字节（如下图中选中部分）。</p>
+<p><img src="https://i.loli.net/2019/11/29/aKIgYodc1FfPi3M.png" alt="image.png"></p>
+</li>
+<li><h4 id="OEM代号"><span class="heading-link">OEM代号</span></h4><p>这部分占8个字节，其内容有创建该文件系统的OEM厂商具体安排。当前DBR中的OEM代号为<code>MSDOS5.0</code>。</p>
+</li>
+<li><h4 id="BPB"><span class="heading-link">BPB</span></h4><p>FAT32的BPB从DBR的第12（<code>0BH</code>偏移处）个字节开始，占用79字节，记录了有关该文件系统的<strong>重要信息</strong>，其中各个参数的含义为：</p>
+<p><img src="https://i.loli.net/2019/11/29/oFAus1NYDQ9fGVK.png" alt="image.png"></p>
+<div class="table-container"><table>
+<thead>
+<tr>
+<th>字节偏移</th>
+<th align="center">字段长度（字节）</th>
+<th align="center">对应图中参数</th>
+<th>字段内容及含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0x0B</td>
+<td align="center">2</td>
+<td align="center"><code>00 02</code></td>
+<td>每扇区字节数</td>
+</tr>
+<tr>
+<td>0x0D</td>
+<td align="center">1</td>
+<td align="center"><code>20</code></td>
+<td>每簇扇区数</td>
+</tr>
+<tr>
+<td>0x0E</td>
+<td align="center">2</td>
+<td align="center"><code>26 00</code></td>
+<td>DOS保留扇区数</td>
+</tr>
+<tr>
+<td>0x10</td>
+<td align="center">1</td>
+<td align="center"><code>02</code></td>
+<td>FAT表个数</td>
+</tr>
+<tr>
+<td>0x11</td>
+<td align="center">2</td>
+<td align="center"><code>00 00</code></td>
+<td>未用</td>
+</tr>
+<tr>
+<td>0x13</td>
+<td align="center">2</td>
+<td align="center"><code>00 00</code></td>
+<td>未用</td>
+</tr>
+<tr>
+<td>0x15</td>
+<td align="center">1</td>
+<td align="center"><code>F8</code></td>
+<td>介质描述符（16进制）</td>
+</tr>
+<tr>
+<td>0x16</td>
+<td align="center">2</td>
+<td align="center"><code>00 00</code></td>
+<td>未用</td>
+</tr>
+<tr>
+<td>0x18</td>
+<td align="center">2</td>
+<td align="center"><code>3F 00</code></td>
+<td>每磁道扇区数</td>
+</tr>
+<tr>
+<td>0x1A</td>
+<td align="center">2</td>
+<td align="center"><code>FF 00</code></td>
+<td>磁头数</td>
+</tr>
+<tr>
+<td>0x1C</td>
+<td align="center">4</td>
+<td align="center"><code>00 30 60 03</code></td>
+<td>隐藏扇区</td>
+</tr>
+<tr>
+<td>0x20</td>
+<td align="center">4</td>
+<td align="center"><code>00 48 20 02</code></td>
+<td>该分区的扇区总数</td>
+</tr>
+<tr>
+<td>0x24</td>
+<td align="center">4</td>
+<td align="center"><code>01 22 00 00</code></td>
+<td>每FAT扇区数</td>
+</tr>
+<tr>
+<td>0x28</td>
+<td align="center">2</td>
+<td align="center"><code>00 00</code></td>
+<td>标记</td>
+</tr>
+<tr>
+<td>0x2A</td>
+<td align="center">2</td>
+<td align="center"><code>00 00</code></td>
+<td>版本</td>
+</tr>
+<tr>
+<td>0x2C</td>
+<td align="center">4</td>
+<td align="center"><code>02 00 00 00</code></td>
+<td>根目录首簇号</td>
+</tr>
+<tr>
+<td>0x30</td>
+<td align="center">2</td>
+<td align="center"><code>01 00</code></td>
+<td>文件系统信息扇区号</td>
+</tr>
+<tr>
+<td>0x32</td>
+<td align="center">2</td>
+<td align="center"><code>06 00</code></td>
+<td>DBR备份扇区号</td>
+</tr>
+<tr>
+<td>0x34</td>
+<td align="center">12</td>
+<td align="center"><code>00 00 00 00 00 00 00 00 00 00 00 00</code></td>
+<td>保留</td>
+</tr>
+<tr>
+<td>0x40</td>
+<td align="center">1</td>
+<td align="center"><code>80</code></td>
+<td>BIOS驱动器号</td>
+</tr>
+<tr>
+<td>0x41</td>
+<td align="center">1</td>
+<td align="center"><code>00</code></td>
+<td>未用</td>
+</tr>
+<tr>
+<td>0x42</td>
+<td align="center">1</td>
+<td align="center"><code>29</code></td>
+<td>扩展引导标记</td>
+</tr>
+<tr>
+<td>0x43</td>
+<td align="center">4</td>
+<td align="center"><code>26 68 E5 DE</code></td>
+<td>卷序列号</td>
+</tr>
+<tr>
+<td>0x47</td>
+<td align="center">11</td>
+<td align="center"><code>20 20 20 20 20 20 20 20 20 20 20</code></td>
+<td>卷标</td>
+</tr>
+<tr>
+<td>0x52</td>
+<td align="center">8</td>
+<td align="center"><code>46 41 54 33 32 20 20 20</code></td>
+<td>文件系统类型</td>
+</tr>
+</tbody></table></div>
+<p>下面对这些参数做详细分析：</p>
+<ol>
+<li><h5 id="0BH-0CH：每扇区字节数"><span class="heading-link">0BH~0CH：每扇区字节数</span></h5><p>记录每个逻辑扇区的大小，一般为512字节，但512不是固定值，该值可以由程序定义，合法值包括512、1024、2048和4096字节</p>
+</li>
+<li><h5 id="0DH：每簇扇区数"><span class="heading-link">0DH：每簇扇区数</span></h5><p>每簇扇区数记录着文件系统的簇大小，即由多少个扇区组成一个簇<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></p>
+<p>FAT32最大支持128扇区的簇。</p>
+<p>在FAT32文件系统中所有的簇从2开始编号，每个簇都有一个自己的地址编号，并且所有的簇都位于数据区内，在数据区之前是没有簇的。</p>
+</li>
+<li><h5 id="0EH-0FH：DBR保留扇区数"><span class="heading-link">0EH~0FH：DBR保留扇区数</span></h5><p>DBR保留扇区数指DBR本身占用的扇区以及其后保留扇区的总和，也就是说DBR到FAT1之间的扇区总数，也可以说是FAT1的相对地址（相对于DBR）。</p>
+</li>
+<li><h5 id="10H：FAT表个数"><span class="heading-link">10H：FAT表个数</span></h5><p>FAT个数描述了该文件系统中有几个FAT表，一般在FAT32文件系统中有2个FAT表，即FAT1和FAT2，FAT2是FAT1的备份。</p>
+</li>
+<li><h5 id="11H-12H：未用"><span class="heading-link">11H~12H：未用</span></h5></li>
+<li><h5 id="13H-14H：未用"><span class="heading-link">13H~14H：未用</span></h5></li>
+<li><h5 id="15H：介质描述符"><span class="heading-link">15H：介质描述符</span></h5><p>介质描述符是描述磁盘介质的参数，根据磁盘性质的不同，取不同的值<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>。</p>
+</li>
+<li><h5 id="16H-17H：未用"><span class="heading-link">16H~17H：未用</span></h5></li>
+<li><h5 id="18H-19H：每磁道扇区数"><span class="heading-link">18H~19H：每磁道扇区数</span></h5><p>这是逻辑C/H/S中的一个参数，其值一般为63。</p>
+</li>
+<li><h5 id="1AH-1BH：磁头数"><span class="heading-link">1AH~1BH：磁头数</span></h5><p>这也是逻辑C/H/S中的一个参数，其值一般为255。</p>
+</li>
+<li><h5 id="1CH-1FH：隐藏扇区数"><span class="heading-link">1CH~1FH：隐藏扇区数</span></h5><p>隐藏扇区数是指本分区之前使用的扇区数，该值与分区表中描述的<strong>该分区的起始扇区号</strong>一致。对于主分区来讲，是MBR到该分区DBR之间的扇区数；对于扩展分区中的逻辑分区而言，是其EBR到DBR之间的扇区数<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup>。</p>
+</li>
+<li><h5 id="20H-23H：扇区总数"><span class="heading-link">20H~23H：扇区总数</span></h5><p>扇区总数是指分区的总扇区数，也就是说FAT32分区的大小。</p>
+</li>
+<li><h5 id="24H-27H：每FAT扇区数"><span class="heading-link">24H~27H：每FAT扇区数</span></h5><p>这四个字节用来记录FAT32分区中每个FAT表占用的扇区数。</p>
+</li>
+<li><h5 id="28H-29H：标志"><span class="heading-link">28H~29H：标志</span></h5><p>这两个字节用于表示FAT2是否可用，当其二进制最高位置为1时，表示只有FAT1可用，否则FAT2也可用。</p>
+</li>
+<li><h5 id="2AH-2BH：版本"><span class="heading-link">2AH~2BH：版本</span></h5><p>这两个字节通常为0。</p>
+</li>
+<li><h5 id="2CH-2FH：根目录首簇号"><span class="heading-link">2CH~2FH：根目录首簇号</span></h5><p>分区在格式化FAT32文件系统时，格式化程序会在数据区中指派一个簇作为FAT32根目录区的开始，并把该簇号记录在BPB中。通常斗士把数据区的第一个簇分配给根目录使用，也就是2号簇。</p>
+</li>
+<li><h5 id="30H-31H：文件系统信息扇区号"><span class="heading-link">30H~31H：文件系统信息扇区号</span></h5><p>FAT32文件系统在DBR的保留扇区安排了一个文件系统信息扇区，用以记录数据区中空闲簇的数量及下一个空闲簇的簇号，该扇区一般在分区的1号扇区，即紧跟DBR后的一个扇区。</p>
+</li>
+<li><h5 id="32H-33H：DBR备份扇区号"><span class="heading-link">32H~33H：DBR备份扇区号</span></h5><p>FAT32文件系统在DBR保留扇区中安排了一个DBR的备份，一般在6号扇区，也就是第7个扇区。该备份与原DBR的内容一摸一样，如果原DBR遭到破坏，可以用备份扇区修复。</p>
+</li>
+<li><h5 id="34H-3FH：保留"><span class="heading-link">34H~3FH：保留</span></h5></li>
+<li><h5 id="40H：BIOS驱动器号"><span class="heading-link">40H：BIOS驱动器号</span></h5><p>这是BIOS的INT 13H所描述的设备号码，一般把硬盘定义为8xH。</p>
+</li>
+<li><h5 id="41H：未用"><span class="heading-link">41H：未用</span></h5></li>
+<li><h5 id="42H：扩展引导标记"><span class="heading-link">42H：扩展引导标记</span></h5><p>扩展引导标记用来确认后面的三个参数是否有效，一般值为29H。</p>
+</li>
+<li><h5 id="43H-46H：卷序列号"><span class="heading-link">43H~46H：卷序列号</span></h5><p>卷序列号是格式化程序在创建系统是生成的一组4个字节的随机数值。</p>
+</li>
+<li><h5 id="47H-51H：卷标"><span class="heading-link">47H~51H：卷标</span></h5><p>卷标是由用户在创建文件系统时指定的一个卷的名称，但这是旧系统所记录的位置，现在的系统已经不再使用这个位置记录卷标，而是由一个目录项管理卷标。</p>
+</li>
+<li><h5 id="52H-59H：文件系统类型"><span class="heading-link">52H~59H：文件系统类型</span></h5><p>BPB的最后一个参数，直接用ASCII码记录当前分区的文件系统类型。</p>
+</li>
+</ol>
+</li>
+<li><h4 id="引导程序"><span class="heading-link">引导程序</span></h4><p>FAT32的DBR引导程序占用420字节（5AH~1FDH）），在Windows 98之前的系统之下，这段代码负责完成DOS三个系统的装入，在Windows 2000之后的系统中，其负责完成将系统文件NTLDR装入，对于一个没有安装操作系统的分区来讲，这段程序没啥用处…</p>
+</li>
+<li><h4 id="结束标志"><span class="heading-link">结束标志</span></h4><p>DBR的结束标志与MBR、EBR的结束标志相同，都是<code>55 AA</code>。</p>
+</li>
+</ol>
+<h3 id="FAT表"><span class="heading-link">FAT表</span></h3><p>FAT（File Allocation Table）即文件分配表，对于FAT文件系统来讲是非常重要的一个组成部分，其主要作用及特点如下：</p>
+<ol>
+<li>FAT文件系统一般有2个FAT表，FAT1是活动FAT，FAT2是备份。</li>
+<li>FAT1的大小与FAT2相同，因此我们可以通过算出FAT1的大小在FAT2处跳转这么多到达数据区。</li>
+<li>FAT表是由FAT表项构成的，我们把FAT表项简称为FAT项，每个FAT项的大小有32位（4字节）。</li>
+<li>每个FAT项都有一个固定的编号，这个编号从0开始。也就是说，第一个FAT项为0号FAT项，第二个FAT项为1号FAT项，以此类推。</li>
+<li>FAT表的前两个FAT项有专门的用途：0号FAT项用于存放分区所在的介质类型，例如硬盘的类型为“<code>F8</code>”，那么硬盘上分区的FAT表第一个FAT项就以“<code>F8</code>”开始；1号FAT项则用来存储文件系统的肮脏标志，表明文件系统被非法卸载或者磁盘表面存在错误。</li>
+<li>分区中每一个簇的适应情况都会映射到FAT表中的唯一一个FAT项。因为0号FAT项和1号FAT项和1号FAT项有特殊用途，无法与数据区中的簇形成映射，因此，数据区中的第一个簇的编号对应FAT表中的2号FAT项，以此类推。</li>
+</ol>
+<p>总的来说，FAT表是用来表示分区使用情况的一个部分，我们可以通过FAT表来计算FAT分区的大小。</p>
+<p><img src="https://i.loli.net/2019/12/01/xIlVwFCgokAs4Sr.png" alt="image.png"></p>
+<center>上图为FAT32文件系统中的FAT1</center>
+### 数据区
+
+<ol>
+<li><h4 id="数据区的位置"><span class="heading-link">数据区的位置</span></h4><p>FAT32的数据区在文件系统中的具体位置是紧跟在FAT2之后的，下图为系统找到FAT32分区中数据区位置的流程图。</p>
+<p><img src="https://i.loli.net/2019/12/01/75cPy6RY2EZIwCQ.png" alt="image.png"></p>
+<p>以下为详细流程：</p>
+<div class="note-plugin default no-icon">
+            <p>① 系统通过读取MBR中分区表的信息定位到该分区的DBR扇区；</p><p>② 读取 DBR 的<code>0EH~0FH</code>偏移处，得到<strong>DBR保留扇区数</strong>的值为38；</p><p>③ 读取 DBR 的<code>24H~27H</code>偏移处，得到<strong>FAT表大小</strong>的值为8705；</p><p>④ 用<code>DBR保留扇区数+2*FAT表大小</code>，结果等于17448，从DBR向后跳转17448扇区，这里就是数据区的开始。</p>
+          </div>
+</li>
+<li><h4 id="数据区的内容"><span class="heading-link">数据区的内容</span></h4><p>FAT32文件系统数据区的内容主要由三个部分组成：根目录、子目录和文件内容。在数据中是以<strong>簇</strong><sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>为单位来管理这段空间的。</p>
+<p><img src="https://i.loli.net/2019/12/01/2Ngx7qOaWTmV4eK.png" alt="image.png"></p>
+<center>FAT32数据区根目录</center>
+</li>
+<li><h4 id="目录项"><span class="heading-link">目录项</span></h4><p>在FAT32文件系统下，分区根目录下的文件及文件夹的目录项存放在根目录区中，分区子目录下的文件及文件夹的目录项存放在子目录区中，根目录区和子目录区都在数据区中。</p>
+<p><img src="https://i.loli.net/2019/12/02/WagAmv71IZrhlFT.png" alt="image.png"></p>
+<ul>
+<li><a name="目录项类型" style=" text-decoration:none;color: black">在FAT32文件系统中，目录项可以分为<strong>4</strong>类：</a></li>
+</ul>
+<div class="note-plugin default no-icon">
+            <ul><li>点击对应的文字可以直接跳转到对应内容</li></ul><p><a href="#短文件名" style=" text-decoration:none;">① 短文件名目录项。</a></p><p><a href="#长文件名" style=" text-decoration:none;">② 长文件名目录项。</a></p><p><a href="#根目录" style=" text-decoration:none;">③ <code>.</code>目录项和<code>..</code>目录项。</a></p><p><a href="#卷标" style=" text-decoration:none;">④ 卷标目录项</a></p>
+          </div>
+
+<p><a name="短文件名" style=" text-decoration:none;color: black">1）短文件名目录项</a></p>
+<p><img src="https://i.loli.net/2019/12/02/LgqPsZCwHcl7t6S.png" alt="image.png"></p>
+<p>上图是一条文件目录项，目录项占32字节，从Winhex中看（默认）是两行数据。</p>
+<p>让我们来分析下这条目录项的含义：</p>
+<div class="table-container"><table>
+<thead>
+<tr>
+<th>字节偏移</th>
+<th align="center">字段长度（字节）</th>
+<th>字段内容及含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0x00</td>
+<td align="center">8</td>
+<td>主文件名</td>
+</tr>
+<tr>
+<td>0x08</td>
+<td align="center">3</td>
+<td>文件的扩展名</td>
+</tr>
+<tr>
+<td>0x0B</td>
+<td align="center">1</td>
+<td>文件属性<br>（读写/只读/隐藏/系统/卷标/子目录/存档）</td>
+</tr>
+<tr>
+<td>0x0C</td>
+<td align="center">1</td>
+<td>未用</td>
+</tr>
+<tr>
+<td>0x0D</td>
+<td align="center">1</td>
+<td>文件创建时间精确到 10ms 的值</td>
+</tr>
+<tr>
+<td>0x0E</td>
+<td align="center">2</td>
+<td>文件创建时间，包括时、分、秒</td>
+</tr>
+<tr>
+<td>0x10</td>
+<td align="center">2</td>
+<td>文件创建日期，包括年、月、日</td>
+</tr>
+<tr>
+<td>0x12</td>
+<td align="center">2</td>
+<td>文件最近访问日期，包括年、月、日</td>
+</tr>
+<tr>
+<td>0x14</td>
+<td align="center">2</td>
+<td>文件起始簇号高位（<code>高位簇</code>）</td>
+</tr>
+<tr>
+<td>0x16</td>
+<td align="center">2</td>
+<td>文件修改时间，包括时、分、秒</td>
+</tr>
+<tr>
+<td>0x18</td>
+<td align="center">2</td>
+<td>文件修改日期，包括年、月、日</td>
+</tr>
+<tr>
+<td>0x1A</td>
+<td align="center">2</td>
+<td>文件起始簇号的低位（<code>低位簇</code>）</td>
+</tr>
+<tr>
+<td>0x1C</td>
+<td align="center">4</td>
+<td>文件大小（字节）</td>
+</tr>
+</tbody></table></div>
+<ol>
+<li><p>00H~07H：主文件名共占<code>8</code>字节，如果文件名（不包含扩展名）用不完8字节，后面用空格填充<sup id="fnref:4"><a href="#fn:4" rel="footnote">4</a></sup>。图中主文件名为<code>IM0O</code>。</p>
+<p>另外该位置的第一个字节也用来表示目录项的分配状态，当该字节是<code>00</code>时，表示该目录项从未使用过；当该字节是<code>E5</code>时，表示该目录项曾经使用过，但目前已经被删除。</p>
+</li>
+<li><p>08H~0AH：文件的扩展名</p>
+<p>文件的扩展名共占<code>3</code>字节，文件夹没有扩展名，如果是文件夹的目录项，该位置会被空格填充。图中的扩展名为<code>JPG</code>。</p>
+</li>
+<li><p>0BH：文件属性<sup id="fnref:5"><a href="#fn:5" rel="footnote">5</a></sup></p>
+<p>文件属性占1字节（<code>8bit</code>），可以用来表示文件的各种属性。</p>
+</li>
+</ol>
+<p><a href="#目录项类型" style=" text-decoration:none;">&lt;&lt;返回目录项</a></p>
+<p><a name="长文件名" style=" text-decoration:none;color: black">2）长文件名目录项</a></p>
+<p><img src="https://i.loli.net/2019/12/02/YNOlPSwaUq7hiDF.png" alt="image.png"></p>
+<p>上图为一个长文件名文件的目录项，图中长文件的文件名为<code>shujuhuifu.txt</code></p>
+<blockquote>
+<p>在Windows 95开始，文件名”8.3“格式的限制被打破了，文件名可以超过8个字符，并且可以使用中文了，扩展名也可以超过3字节，这种格式的文件名就称为长文件名。</p>
+<p>在Windows 95以上的系统中，长文件名实际存储着两个名字，一个短文件名和一个长文件名。当创建一个长文件名时，其对应的短文件名有以下3个处理原则。</p>
+</blockquote>
+<div class="note-plugin warning no-icon">
+            <ul><li>系统取长文件名的前6个字符加上<code>~1</code>形成短文件名，其扩展名不变；</li></ul><blockquote><p>图中取前六个字符<code>SHUJUH</code></p></blockquote><ul><li>如果已存在这个名字的文件，则符号<code>~</code>后的数字自动增加；</li></ul><blockquote><p>例如：<code>SHUJUH~1TXT</code>与<code>SHUJUH~2TXT</code></p></blockquote><ul><li>如果有DOS和Windows 3.x非法的字符，则以下划线<code>_</code>替代。</li><li>每个长文件名目录项也占用32字节，一个目录项作为长文件名目录项使用时，其属性字节值为0FH，能够存储13个字符，如果文件名很长，一个长文件名就需要多个目录项，这些目录项按<strong>倒序排列</strong>在其短文件名目录项之前。</li></ul><blockquote><p>如图中标明的顺序</p></blockquote>
+          </div>
+
+<div class="table-container"><table>
+<thead>
+<tr>
+<th>字节偏移</th>
+<th align="center">字段长度（字节）</th>
+<th>字段内容及含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0x00</td>
+<td align="center">1</td>
+<td>序列号</td>
+</tr>
+<tr>
+<td>0x01</td>
+<td align="center">10</td>
+<td>文件名的第1~5个Unicode码字符</td>
+</tr>
+<tr>
+<td>0x0B</td>
+<td align="center">1</td>
+<td>长文件名目录项的属性标志</td>
+</tr>
+<tr>
+<td>0x0C</td>
+<td align="center">1</td>
+<td>保留未用</td>
+</tr>
+<tr>
+<td>0x0D</td>
+<td align="center">1</td>
+<td>短文件名校验</td>
+</tr>
+<tr>
+<td>0x0E</td>
+<td align="center">12</td>
+<td>文件名的第6~11个Unicode码字符</td>
+</tr>
+<tr>
+<td>0x1A</td>
+<td align="center">2</td>
+<td>始终为0</td>
+</tr>
+<tr>
+<td>0x1C</td>
+<td align="center">2</td>
+<td>文件名的第12~13个Unicode码字符</td>
+</tr>
+</tbody></table></div>
+<hr>
+<ul>
+<li><ol>
+<li>序列号(00)</li>
+</ol>
+<p>序列号占1字节，该参数用来描述长文件名目录项的排序。</p>
+<p>在这个字节的8位中，0~4这5位用来描述长文件名目录项的顺序号，从1开始编号。6位（也就是说第7位）如果“1”表明该目录项是最后一项。如果文件删除，该字节也会改为<code>E5</code>。</p>
+</li>
+<li><ol start="2">
+<li>文件名的第1~5个Unicode码字符</li>
+</ol>
+<p>该参数长度为10字节（因为Unicode编码储存字符时每个字符占用2字节）。</p>
+<p>如果文件名已经记录完，但该参数的空间中还有未用的字节，就会在文件名最后一个字节填充2个字节的<code>00</code>，随后未用的字节用<code>FF</code>填充。</p>
+</li>
+<li><ol start="3">
+<li>长文件名目录项的属性标志</li>
+</ol>
+<p>该参数长度为1字节，是属性字节。当属性的只读位、隐藏位、系统位、卷标位全为1，其它全为0是，改制就为16进制的<code>0FH</code>，表示该目录项为长文件名记录项。</p>
+</li>
+<li><ol start="4">
+<li>未用</li>
+</ol>
+<p>该字节不使用。</p>
+</li>
+<li><ol start="5">
+<li>短文件名校验和</li>
+</ol>
+<blockquote>
+<p>该参数长度为 1 字节，是 个校验和，长文件名目录项通过这个校验和将其与相应的短文件名目录项关联起来。校验和的数值是使用短文件名计算得到，同 文件的长文件名目录项的校验和必须是相 向的。校验和的计算方法是依次将短文件名的各个字符对应的二进制值相加，在每一步相加前要先将二进制的结果值依次向右移动一位，最右边的位循环移动到最左边，然后再加上下一个字符所对应的二进制值，直到把最后一个字符加完，结果就是校验和的数值。 – 数据恢复技术</p>
+</blockquote>
+</li>
+<li><ol start="6">
+<li>文件名的第6~11个字符</li>
+</ol>
+<p>同[2.]</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>   <a href="#目录项类型" style=" text-decoration:none;">&lt;&lt;返回目录项</a></p>
+<p>   <a href="#目录项类型" style=" text-decoration:none;">&lt;&lt;返回目录项</a></p>
+<p>   <a href="#目录项类型" style=" text-decoration:none;">&lt;&lt;返回目录项</a></p>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;">分区中的簇：<a href="/document/%E5%88%86%E5%8C%BA%E4%B8%AD%E7%9A%84%E7%B0%87.html">文档</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;">磁盘介质描述符：<a href="/document/%E7%A3%81%E7%9B%98%E4%BB%8B%E8%B4%A8%E6%8F%8F%E8%BF%B0%E7%AC%A6.html">文档</a></span><a href="#fnref:2" rev="footnote"> ↩</a></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">3.</span><span style="display: inline-block; vertical-align: top;">不过该值不严谨，填写时可以直接填其绝对位置</span><a href="#fnref:3" rev="footnote"> ↩</a></li><li id="fn:4"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">4.</span><span style="display: inline-block; vertical-align: top;">空格在16进制中的数值为<code>20H</code></span><a href="#fnref:4" rev="footnote"> ↩</a></li><li id="fn:5"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">5.</span><span style="display: inline-block; vertical-align: top;">FAT32目录项的文件属性：<a href="/document/FAT32%E7%9B%AE%E5%BD%95%E9%A1%B9%E7%9A%84%E6%96%87%E4%BB%B6%E5%B1%9E%E6%80%A7.html">文档</a></span><a href="#fnref:5" rev="footnote"> ↩</a></li></ol></div></div></div><footer class="post-footer"><div class="post-end"><span>------ </span><span>本文结束，感谢您的阅读</span><span> ------</span></div><div class="post-copyright"><div class="post-copyright-author"><span class="post-copyright-author-name">本文作者: </span><span class="post-copyright-author-value"><a href="http://www.im0o.top">0o酱</a></span></div><div class="post-copyright-link"><span class="post-copyright-link-name">本文链接: </span><span class="post-copyright-link-value"><a href="http://www.im0o.top/2019/11/28/使用Winhex进行数据恢复（3）/">http://www.im0o.top/2019/11/28/使用Winhex进行数据恢复（3）/</a></span></div><div class="post-copyright-notice"><span class="post-copyright-notice-name">版权声明: </span><span class="post-copyright-notice-value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-cn" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><i class="post-tags-item__i fa fa-tags"></i><a class="post-tags-item__a" href="http://www.im0o.top/tags/数据恢复/">数据恢复</a></span><span class="post-tags-item"><i class="post-tags-item__i fa fa-tags"></i><a class="post-tags-item__a" href="http://www.im0o.top/tags/Winhex/">Winhex</a></span><span class="post-tags-item"><i class="post-tags-item__i fa fa-tags"></i><a class="post-tags-item__a" href="http://www.im0o.top/tags/FAT32/">FAT32</a></span></div><div class="reward"><div class="reward-button">请我瓶红茶~</div><div class="reward-qr"><span class="reward-qr-alipay"><img class="reward-qr-alipay__img" src="/assets/img/alipay.jpg"><div class="reward-qr-alipay-text">支付宝打赏</div></span><span class="reward-qr-wechat"><img class="reward-qr-wechat__img" src="/assets/img/wechat.png"><div class="reward-qr-wechat-text">微信打赏</div></span></div></div><nav class="paginator"><div class="paginator-post"><div class="paginator-post-next"><a class="paginator-post-next__a" href="/2019/11/24/实用的数据恢复软件/"><span>实用的数据恢复软件</span><i class="fa fa-chevron-right"></i></a></div></div></nav></footer></div></div><div class="comments" id="comments"><div id="valine-container"></div></div></div><aside class="sidebar" id="sidebar"><div class="sidebar-inner"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#知识点总览"><span class="toc-number">2.</span> <span class="toc-text">知识点总览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FAT32-分区的构成"><span class="toc-number">3.</span> <span class="toc-text">FAT32 分区的构成</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DBR及其保留扇区"><span class="toc-number">3.1.</span> <span class="toc-text">DBR及其保留扇区</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#跳转指令"><span class="toc-number">3.1.1.</span> <span class="toc-text">跳转指令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OEM代号"><span class="toc-number">3.1.2.</span> <span class="toc-text">OEM代号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#BPB"><span class="toc-number">3.1.3.</span> <span class="toc-text">BPB</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#引导程序"><span class="toc-number">3.1.4.</span> <span class="toc-text">引导程序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#结束标志"><span class="toc-number">3.1.5.</span> <span class="toc-text">结束标志</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FAT表"><span class="toc-number">3.2.</span> <span class="toc-text">FAT表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#数据区的位置"><span class="toc-number">3.2.1.</span> <span class="toc-text">数据区的位置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数据区的内容"><span class="toc-number">3.2.2.</span> <span class="toc-text">数据区的内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#目录项"><span class="toc-number">3.2.3.</span> <span class="toc-text">目录项</span></a></li></ol></li></ol></li></ol></div></section><!-- ov = overview --><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="https://miao.su/images/2019/10/04/52a4d509ea208a1bd0f013c679dabd0b.png" alt="avatar"></div><p class="sidebar-ov-author__p">光阴如梦，昨日随风</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social__item" href="http://github.com/0ojixueseno0" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><i class="sidebar-ov-social__item--icon fa fa-github"></i></a><a class="sidebar-ov-social__item" href="inksugar" target="_blank" rel="noopener" data-popover="微信" data-popover-pos="up"><i class="sidebar-ov-social__item--icon fa fa-weixin"></i></a><a class="sidebar-ov-social__item" href="2773173293" target="_blank" rel="noopener" data-popover="QQ" data-popover-pos="up"><i class="sidebar-ov-social__item--icon fa fa-qq"></i></a><a class="sidebar-ov-social__item" href="http://space.bilibili.com/35785867#/" target="_blank" rel="noopener" data-popover="B站" data-popover-pos="up"><i class="sidebar-ov-social__item--icon fa fa-television"></i></a></div><div class="sidebar-ov-state"></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-cn" target="_blank" rel="noopener" data-popover="知识共享" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg" alt="知识共享"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span>你已阅读了 </span><span class="sidebar-reading-info-num">0</span></div><div class="sidebar-reading-line"></div></div></div></aside><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>&copy; 2019</span><span class="fa fa-heart footer-icon"></span><span>0o酱.</span></div><div><span>由 <a href="http://hexo.io/" title="hexo" target="_blank" rel="noopener">hexo</a> 强力驱动</span><span> v3.9.0.</span><span class="separator">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="stun" target="_blank" rel="noopener">stun</a></span><span> v1.5.4.</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="progress"></div></div><div class="back2top" id="back2top"><i class="back2top-icon fa fa-rocket"></i></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@latest/canvas-nest.min.js" color="0,0,0" opacity="0.6" count="99" zindex="-1"></script><script src="https://cdn.jsdelivr.net/npm/leancloud-storage@latest/dist/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script><script>function loadValine () {
+  var GUEST_INFO = ['nick', 'mail', 'link'];
+  var guest_info = 'nick,mail';
+
+  guest_info = guest_info.split(',').filter(function(item) {
+    return GUEST_INFO.indexOf(item) > -1;
+  });
+
+  new Valine({
+    el: '#valine-container',
+    appId: 'tnbYrgjBNXyv9CGieakQl5Uw-gzGzoHsz',
+    appKey: 'yej0JecfeXMR9xfccQNfpRJf',
+    notify: true,
+    verify: true,
+    placeholder: '说点什么吧~',
+    avatar: 'hide',
+    meta: guest_info,
+    pageSize: '10' || 10,
+    visitor: true,
+    recordIP: false,
+    lang: 'zh-cn' || 'zh-cn'
+  });
+}
+
+if (false) {
+  loadValine();
+} else {
+  window.addEventListener('DOMContentLoaded', loadValine, false);
+}</script><script src="/js/utils.js?v=1.5.4"></script><script src="/js/stun-boot.js?v=1.5.4"></script><script src="/js/scroll.js?v=1.5.4"></script><script src="/js/header.js?v=1.5.4"></script><script src="/js/sidebar.js?v=1.5.4"></script></body></html>
