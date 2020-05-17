@@ -1,4 +1,4 @@
-/**
+<html><head></head><body>/**
  * Created by Weic on 2017/6/8.
  */
 // Pjax用其他脚本封装函数
@@ -76,3 +76,4 @@ $('.links-block>a').addClass('links-block-btn btn btn-outline-info btn-block').w
 $('.links-block').addClass('row');
 
 }
+</body></html>

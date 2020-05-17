@@ -1,4 +1,4 @@
-/*!
+<html><head></head><body>/*!
  * Copyright 2012, Chris Wanstrath
  * Released under the MIT License
  * https://github.com/defunkt/jquery-pjax
@@ -658,8 +658,18 @@ function parseHTML(html) {
 //
 // Returns an Object with url, title, and contents keys.
 function extractContainer(data, xhr, options) {
-  var obj = {}, fullDocument = /<html i.test(data) prefer x-pjax-url header if it was set, otherwise fallback to using the original requested url. var serverurl="xhr.getResponseHeader('X-PJAX-URL')" obj.url="serverUrl" ? stripinternalparams(parseurl(serverurl)) : options.requesturl $head, $body attempt parse response html into elements (fulldocument) {>]*>([\s\S.]*)<\ body>/i)[0]))
-    var head = data.match(/<head[^>]*>([\s\S.]*)<\ head>/i)
+  var obj = {}, fullDocument = /<html/i.test(data)
+
+  // Prefer X-PJAX-URL header if it was set, otherwise fallback to
+  // using the original requested url.
+  var serverUrl = xhr.getResponseHeader('X-PJAX-URL')
+  obj.url = serverUrl ? stripInternalParams(parseURL(serverUrl)) : options.requestUrl
+
+  var $head, $body
+  // Attempt to parse response html into elements
+  if (fullDocument) {
+    $body = $(parseHTML(data.match(/<body[^>]*>([\s\S.]*)<\/body>/i)[0]))
+    var head = data.match(/<head[^>]*>([\s\S.]*)<\/head>/i)
     $head = head != null ? $(parseHTML(head[0])) : $body
   } else {
     $head = $body = $(parseHTML(data))
@@ -891,4 +901,4 @@ if ($.support.pjax) {
 }
 
 })(jQuery)
-</title></title></\></head[^></\></html></title></form>
+</title></form></body></html>

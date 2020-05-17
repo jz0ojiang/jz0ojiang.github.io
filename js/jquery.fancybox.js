@@ -1,4 +1,4 @@
-// ==================================================
+<html><head></head><body>// ==================================================
 // fancyBox v3.1.20
 //
 // Licensed GPLv3 for open source use
@@ -168,7 +168,7 @@
                     '<div class="fancybox-infobar">' +
                         '<button data-fancybox-prev title class="fancybox-button fancybox-button--left"></button>' +
                         '<div class="fancybox-infobar__body">' +
-                            '<span data-fancybox-index></span>&nbsp;/&nbsp;<span data-fancybox-count></span>' +
+                            '<span data-fancybox-index></span> / <span data-fancybox-count></span>' +
                         '</div>' +
                         '<button data-fancybox-next title class="fancybox-button fancybox-button--right"></button>' +
                     '</div>' +
@@ -2249,7 +2249,95 @@
 
             // Remove unnecessary slides
             $.each( self.slides, function( key, slide ) {
-                if ( slide.pos >= self.currPos - 1 && slide.pos <= 1 2 self.currpos + ) { slides[ slide.pos ]="slide;" } else if ( slide $.fancybox.stop( slide.$slide ); slide.$slide.unbind().remove(); }); self.slides="slides;" self.updatecursor(); self.trigger( 'aftershow' try to focus on the first focusable element $( document.activeelement ).is( '[disabled]' || current.opts.autofocus && !( current.type="=" 'image' 'iframe' self.focus(); }, preload next and previous slides="=" =="============================" "" : function() var self="this;" next, prev; self.group.length < return; ]; prev="self.slides[" - next.type="==" self.loadslide( prev.type="==" find current="this.current;" $el; this.isclosing skip for images iframes $el="current" current.iscomplete ? current.$slide.find('button,:input,[tabindex],a').filter(':not([disabled]):visible:first') null; $el.length this.$refs.container; $el.focus(); activates instance brings container front enables keyboard, notifies other instances about deactivating activate function () deactivate all '.fancybox-container' ).each(function 'fancybox' closing (instance instance.uid !="=" self.uid !instance.isclosing) instance.trigger( 'ondeactivate' self.current self.$refs.container.index()> 0 ) {
+                if ( slide.pos >= self.currPos - 1 && slide.pos <= self.currPos + 1 ) {
+                    slides[ slide.pos ] = slide;
+
+                } else if ( slide ) {
+
+                    $.fancybox.stop( slide.$slide );
+
+                    slide.$slide.unbind().remove();
+                }
+            });
+
+            self.slides = slides;
+
+            self.updateCursor();
+
+            self.trigger( 'afterShow' );
+
+            // Try to focus on the first focusable element
+            if ( $( document.activeElement ).is( '[disabled]' ) || ( current.opts.autoFocus && !( current.type == 'image' || current.type === 'iframe' ) ) ) {
+                self.focus();
+            }
+
+        },
+
+
+        // Preload next and previous slides
+        // ================================
+
+        preload : function() {
+            var self = this;
+            var next, prev;
+
+            if ( self.group.length < 2 ) {
+                return;
+            }
+
+            next  = self.slides[ self.currPos + 1 ];
+            prev  = self.slides[ self.currPos - 1 ];
+
+            if ( next && next.type === 'image' ) {
+                self.loadSlide( next );
+            }
+
+            if ( prev && prev.type === 'image' ) {
+                self.loadSlide( prev );
+            }
+
+        },
+
+
+        // Try to find and focus on the first focusable element
+        // ====================================================
+
+        focus : function() {
+            var current = this.current;
+            var $el;
+
+            if ( this.isClosing ) {
+                return;
+            }
+
+            // Skip for images and iframes
+            $el = current && current.isComplete ? current.$slide.find('button,:input,[tabindex],a').filter(':not([disabled]):visible:first') : null;
+            $el = $el && $el.length ? $el : this.$refs.container;
+
+            $el.focus();
+        },
+
+
+        // Activates current instance - brings container to the front and enables keyboard,
+        // notifies other instances about deactivating
+        // =================================================================================
+
+        activate : function () {
+            var self = this;
+
+            // Deactivate all instances
+            $( '.fancybox-container' ).each(function () {
+                var instance = $(this).data( 'FancyBox' );
+
+                // Skip self and closing instances
+                if (instance && instance.uid !== self.uid && !instance.isClosing) {
+                    instance.trigger( 'onDeactivate' );
+                }
+
+            });
+
+            if ( self.current ) {
+                if ( self.$refs.container.index() > 0 ) {
                     self.$refs.container.prependTo( document.body );
                 }
 
@@ -2480,7 +2568,8 @@
             $('[data-fancybox-count]').html( self.group.length );
             $('[data-fancybox-index]').html( index + 1 );
 
-            $('[data-fancybox-prev]').prop('disabled', ( !opts.loop && index <= 0 ) ); $('[data-fancybox-next]').prop('disabled', ( !opts.loop && index>= self.group.length - 1 ) );
+            $('[data-fancybox-prev]').prop('disabled', ( !opts.loop && index <= 0 ) );
+            $('[data-fancybox-next]').prop('disabled', ( !opts.loop && index >= self.group.length - 1 ) );
 
         },
 
@@ -3558,7 +3647,14 @@
 				newOffsetX = minTranslateX - 1 + Math.pow( -minTranslateX + currentOffsetX + distanceX, 0.8 ) || 0;
 			}
 
-			//    <- 0 1 if ( distancex < && newoffsetx maxtranslatex ) { + - math.pow( currentoffsetx distancex, 0.8 || 0; } newheight> canvasHeight ) {
+			//    <-
+			if ( distanceX  < 0 && newOffsetX < maxTranslateX ) {
+				newOffsetX = maxTranslateX + 1 - Math.pow( maxTranslateX - currentOffsetX - distanceX, 0.8 ) || 0;
+			}
+
+		}
+
+		if ( newHeight > canvasHeight ) {
 
 			//   \/
 			if ( distanceY > 0 && newOffsetY > minTranslateY ) {
@@ -4818,4 +4914,4 @@
 
 
 }(document, window, window.jQuery));
-</-></=></=></div></div></div>
+</div></div></div></body></html>
