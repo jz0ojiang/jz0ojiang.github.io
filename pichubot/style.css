@@ -61,7 +61,13 @@ body {
   text-shadow: -2px 4px 6px #848484;
 }
 
-
+p {
+  display: block;
+  margin-block-start: 5px;
+  margin-block-end: 5px;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px
+}
 
 @media screen and (max-width: 1200px) {
   /* 小于1200像素 */
