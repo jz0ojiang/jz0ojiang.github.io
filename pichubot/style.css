@@ -24,9 +24,17 @@ body {
     z-index: -1;
 }
 
+.codebox {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 80%;
+  max-width: 100%;
+  border: 0px;
+  box-shadow: 0 0 0 2px #999 inset;
+  padding: 3px 7px;
+}
 
 .box {
-    top:15%;
     display: -webkit-flex;
     display: flex;
     -webkit-justify-content: center;
@@ -75,9 +83,6 @@ p {
     font-size: 26px;
     text-align: center;
   }
-  .box {
-    top: 10%;
-  }
 }
 @media screen and (max-width: 764px) {
   /* 小于764像素 */
@@ -85,10 +90,4 @@ p {
     font-size: 22px;
     text-align: center;
   }
-  .box {
-    top: auto;
-  }
 }
-
-
-

@@ -22,18 +22,60 @@
                 <li>[!抽签][!cq] 开始抽签（观音签 共100签）</li>
                 <li>[!鸡汤][!cureword] 随机获取一碗鸡汤</li>
                 <li>[!人话][!nbnhhsh]+[词语缩写] 查询缩写对应的人话</li>
-                <p>用法：!人话 nbnhhsh #回复：以下是nbnhhsh的人话：能不能好好说话</p><div style="height: 10px;"></div>
+                <div class="codebox">
+                    <p>用法：!人话 nbnhhsh <br> #回复：以下是nbnhhsh的人话：能不能好好说话</p>
+                </div>
                 <li>[!机翻][!翻译][!百度翻译][!fanyi]+[目标语言]+[原文] 翻译语言</li>
-                <p>
-                    用法：!翻译 zh hello world #回复：hello world 的中文是：你好，世界<br>
-                    支持的[目标语言]：中文, 英语, 日语, 韩语, 西班牙语, 法语, 泰语, 阿拉伯语, 俄语, 葡萄牙语, 粤语, 文言文<br>
-                    也可以使用语言ID: zh, en, jp, kor, spa, fra, th, ara, ru, pt, yue, wyw
-                </p><div style="height: 10px;"></div>
+                <div class="codebox">
+                    <p>
+                        用法：!翻译 zh hello world <br> #回复：hello world 的中文是：你好，世界<br>
+                        支持的[<b>目标语言</b>]：中文, 英语, 日语, 韩语, 西班牙语, 法语, 泰语, 阿拉伯语, 俄语, 葡萄牙语, 粤语, 文言文<br>
+                        也可以使用语言ID: zh, en, jp, kor, spa, fra, th, ara, ru, pt, yue, wyw
+                    </p>
+                </div>
+            </ul>
+            <p>3. 青年大学习统计功能</p>
+            <p style="padding-left: 18px;">指令(均以大学习/dxx开头)：</p>
+            <ul>
+                <li>[!大学习][!dxx]+[查询][cx]</li>
+                <div class="codebox">
+                    <p>格式：！大学习 查询 <br> 回复：@you 本次青年大学习完成人数：n/all <br>未完成x人</p>
+                </div>
+                <li>[!大学习][!dxx]+[列出][list]</li>
+                <li>[!大学习][!dxx]+[未完成][at]</li>
+                <li>[!大学习][!dxx]+[重置][reset]</li>
+                <li>[!大学习][!dxx]+[添加][add]+[@某人]</li>
+                <li>[!大学习][!dxx]+[移除][remove]+[@某人]</li>
                 <p>向 QQ:2773173293 申请并提交班级群需要做青年大学习同学的QQ列表即可自动统计青年大学习完成情况<br>
                 <b>原理：</b>成员发送青年大学习完成图片自动检测并比对QQ列表，完成后将改成员状态设置为完成<br>
                 <b>需注意：</b>青年大学习截图必须为全屏截图，不支持小窗</p>
+                <div style="margin-top: -10px;display: inline;">
+                    <p style="display: inline-flex;">[</p><a href="/assets/download/XXX班 班级成员+QQ表.xlsx">点击下载提交用格式表格</a><p style="display: inline;">]</p>
+                </div>
             </ul>
-            <p>3. 关于作者</p>
+            <p>4. 更新日志</p>
+            <ul>
+                <div class="codebox">
+                    2020.12.01 - 16:02:42: 优化代码 修复bug 修改大学习提示
+                    <hr>
+                    2020.12.01 - 14:48:47: 群号数据库完工 + 新增功能：添加完成/移除完成/列出未完成名单
+                    <hr>
+                    2020.12.01 - 09:43:15: sqlite3 group before(群组改为数据库存储[开工])
+                    <hr>
+                    2020.11.30 - 10:23:19: completed Group Messages
+                    <hr>
+                    2020.11.30 - 09:19:33: 修复bug 优化代码
+                    <hr>
+                    2020.11.26 - 21:04:29: 观音签准备
+                    <hr>
+                    2020.11.26 - 00:08:15: 初步完成大学习统计功能
+                    <hr>
+                    2020.11.25 - 20:53:43: CQ码解析完成
+                    <hr>
+                    2020.11.25 - 11:53:54: First commit
+                </div>
+            </ul>
+            <p>5. 关于作者</p>
             <ul><p>Pichu Bot Authored by 0ojixueseno0 [QQ 2773173293]</p></ul>
             </ul>
       </div>
