@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Here is 0o酱</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="profile-card">
+    <div class="card-header">
+      <div class="pic">
+        <img src="pic.jpg" alt="">
+      </div>
+      <div class="name">0o酱</div>
+      <div class="desc">Coder & Developer</div>
+      <div class="sm">
+        <a href="https://t.me/jz0ojiang" class="fab fa-telegram-plane"></a>
+        <a href="https://twitter.com/0ojixueseno0" class="fab fa-twitter"></a>
+        <a href="https://github.com/0ojixueseno0" class="fab fa-github"></a>
+        <a href="javascript:qq()" class="fab fa-qq"></a>
+      </div>
+      <a href="/blog/" class="contact-btn">My blog</a>
+    </div>
+    <div class="card-footer">
+      <div class="numbers">
+        <div class="item">
+          <span>19+</span>
+          Projects
+        </div>
+        <div class="border"></div>
+        <div class="item">
+          <span>14</span>
+          Posts
+        </div>
+        <!-- <div class="border"></div>
+        <div class="item">
+          <span>1</span>
+          Heart
+        </div> -->
+      </div>
+    </div>
+  </div>
+  <script>
+
+    function qq() {
+      window.alert = function(name){
+      var iframe = document.createElement("IFRAME");
+      iframe.style.display="none";
+      iframe.setAttribute("src", 'data:text/plain');
+      document.documentElement.appendChild(iframe);
+      window.frames[0].window.alert(name);
+      iframe.parentNode.removeChild(iframe);
+      }
+
+      alert('QQ-Num: 2773173293\nQid: furry0o\n添加请备注来意');
+    }
+  </script>
+</body>
+</html>
