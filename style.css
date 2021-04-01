@@ -6,6 +6,15 @@
   text-decoration: none;
 }
 
+canvas{
+  z-index: 10;
+  pointer-events: none;
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
 body{
   height: 100vh;
   background: url(https://gitee.com/im0o/photobed/raw/master/img/20210228080846.jpg) no-repeat center;
