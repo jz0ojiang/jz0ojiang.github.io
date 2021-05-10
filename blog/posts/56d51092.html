@@ -145,38 +145,38 @@
 <p>于是，我们可以通过更改图片显示的分辨率来隐藏图片的部分区域。从而达到隐藏传递信息的效果。</p>
 <span id="more"></span>
 
-<h2 id="开始操作"><a href="#开始操作" class="headerlink" title="开始操作"></a>开始操作</h2><h3 id="PNG部分"><a href="#PNG部分" class="headerlink" title="PNG部分"></a>PNG部分</h3><p><img src= "/blog/img/loading.gif" data-lazy-src="https://i.loli.net/2019/12/22/HjreaISC6xbWogQ.png" alt="image.png"></p>
+<h2 id="开始操作"><a href="#开始操作" class="headerlink" title="开始操作"></a>开始操作</h2><h3 id="PNG部分"><a href="#PNG部分" class="headerlink" title="PNG部分"></a>PNG部分</h3><p><img src="https://i.loli.net/2019/12/22/HjreaISC6xbWogQ.png" alt="image.png"></p>
 <p>这是一张普通的png格式的照片，我们可以通过编辑这张照片进行传递信息</p>
-<p><img src= "/blog/img/loading.gif" data-lazy-src="https://i.loli.net/2019/12/22/xOLY5VD1lWcS6Ak.png" alt="image.png"></p>
+<p><img src="https://i.loli.net/2019/12/22/xOLY5VD1lWcS6Ak.png" alt="image.png"></p>
 <p>编辑后可以修改图片的分辨率，在上面的图片中我们可以看到，这张图片的分辨率是<code>1920*908</code>像素</p>
 <p>也就是图片的长度为1920像素，宽度为908像素。</p>
 <p>接下来，打开Winhex<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>，将编辑好的图片拖入Winhex窗口中</p>
-<p><img src= "/blog/img/loading.gif" data-lazy-src="https://i.loli.net/2019/12/22/o3HlntUGZSCzIse.png" alt="image.png"></p>
+<p><img src="https://i.loli.net/2019/12/22/o3HlntUGZSCzIse.png" alt="image.png"></p>
 <p>将数据解释器设置为Big-Endian（设置方法：点击选项—数据解释器—将窗口右下角的Big-Endian打勾即可）</p>
 <p>在PNG图片中，其分辨率位置总是在IHDR（ASCII码栏中的IHDR）的后8个字节，即图中选择的8个字节：</p>
-<p><img src= "/blog/img/loading.gif" data-lazy-src="https://i.loli.net/2019/12/22/hGjxzM3cBaTikq6.png" alt="image.png"></p>
+<p><img src="https://i.loli.net/2019/12/22/hGjxzM3cBaTikq6.png" alt="image.png"></p>
 <p>使用数据解释器点选到前四个字节的开头，其值为1920，这四个字节则为图片的宽度。我们主要需要修改的是后四个字节：高度</p>
-<p><img src= "/blog/img/loading.gif" data-lazy-src="https://i.loli.net/2019/12/22/J8D2EQACPZpjLbM.png" alt="image.png"></p>
+<p><img src="https://i.loli.net/2019/12/22/J8D2EQACPZpjLbM.png" alt="image.png"></p>
 <p>点选到后4个字节中，查看其值为908，这个值就是图片的高度。</p>
-<p><img src= "/blog/img/loading.gif" data-lazy-src="https://i.loli.net/2019/12/22/AYOB2uDGrHE8FRT.png" alt="image.png"></p>
+<p><img src="https://i.loli.net/2019/12/22/AYOB2uDGrHE8FRT.png" alt="image.png"></p>
 <p>在数据解释器中的32Bit栏中修改数值即可修改该图片的”显示“高度，将其修改为750（像素），保存后查看图片：</p>
-<p><img src= "/blog/img/loading.gif" data-lazy-src="https://i.loli.net/2019/12/22/LsYE1ptgk6GcvBf.png" alt="image.png"></p>
-<p><img src= "/blog/img/loading.gif" data-lazy-src="https://i.loli.net/2019/12/22/yx9w2A3VJsFkUe5.png" alt="image.png"></p>
+<p><img src="https://i.loli.net/2019/12/22/LsYE1ptgk6GcvBf.png" alt="image.png"></p>
+<p><img src="https://i.loli.net/2019/12/22/yx9w2A3VJsFkUe5.png" alt="image.png"></p>
 <p>可以看到这张图片的高度被缩小了，先前添加的文字只剩下一点部分可以看见。</p>
 <p>可能有人说了：这不就是剪切吗？</p>
 <p>接下来就是与剪切不同的地方了，因为图片的数据还在，只显示了1920*750的部分而已，我们将数值改回去看看会发生什么：</p>
-<p><img src= "/blog/img/loading.gif" data-lazy-src="https://i.loli.net/2019/12/22/GcKODThZItPb5UE.gif" alt="pngheight.gif"></p>
+<p><img src="https://i.loli.net/2019/12/22/GcKODThZItPb5UE.gif" alt="pngheight.gif"></p>
 <p>将显示大小更改为1920*1000后可以看见原来编辑的信息了。</p>
 <h3 id="JPEG图片部分"><a href="#JPEG图片部分" class="headerlink" title="JPEG图片部分"></a>JPEG图片部分</h3><p>这是一张jpg格式的文件，与png图片一样，我们在上面添加文字。</p>
-<p><img src= "/blog/img/loading.gif" data-lazy-src="https://i.loli.net/2019/12/22/G6rhTfeRZtpFQYw.png" alt="image.png"></p>
-<p><img src= "/blog/img/loading.gif" data-lazy-src="https://i.loli.net/2019/12/22/zaIBlOAH9DMEVUL.png" alt="image.png"></p>
+<p><img src="https://i.loli.net/2019/12/22/G6rhTfeRZtpFQYw.png" alt="image.png"></p>
+<p><img src="https://i.loli.net/2019/12/22/zaIBlOAH9DMEVUL.png" alt="image.png"></p>
 <p>添加完毕后拖入Winhex，显示如下图：</p>
-<p><img src= "/blog/img/loading.gif" data-lazy-src="https://i.loli.net/2019/12/22/T4mFuMsjWSIQKvh.png" alt="image.png"></p>
+<p><img src="https://i.loli.net/2019/12/22/T4mFuMsjWSIQKvh.png" alt="image.png"></p>
 <p>在JPEG格式的文件中，有一个属性是也是显示分辨率，其标识为<code>FF C0</code>，更改下图中绿色的部分即可</p>
 <p>（绿色部分为高度，蓝色部分为宽度，均为Big-Endian）</p>
-<p><img src= "/blog/img/loading.gif" data-lazy-src="https://i.loli.net/2019/12/22/Tda8HtZPRmLcgbu.png" alt="image.png"></p>
+<p><img src="https://i.loli.net/2019/12/22/Tda8HtZPRmLcgbu.png" alt="image.png"></p>
 <p>修改高度后的图片如下图（修改方法同PNG修改方法，即在数据解释器中修改数值，不过这里是2个字节，则在16bit栏中更改数字）</p>
-<p><img src= "/blog/img/loading.gif" data-lazy-src="https://i.loli.net/2019/12/22/tjluKv81O4RSBGr.gif" alt="jpghight.gif"></p>
+<p><img src="https://i.loli.net/2019/12/22/tjluKv81O4RSBGr.gif" alt="jpghight.gif"></p>
 <center>更改JPEG图片显示分辨率大小具体操作</center>
 以上为图片信息隐藏术，在发送图片的时候请注意要记得勾选**发送原图**哦，不是原图的话图片数据会比原图少，隐藏掉的部分也会消失哦
 

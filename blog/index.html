@@ -53,7 +53,7 @@
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2021-05-10 17:47:30'
+  postUpdate: '2021-05-10 18:15:20'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -298,8 +298,24 @@ Vault与Playerpoints都开启后的样子…
 
 点选到后4个字节中，查看其值为908，这个值就是图片的高度。
 
-在数据解释器中的32Bit栏中修改数值即可修改该 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/blog/posts/ea54819e.html" title="使用Winhex进行数据恢复（3）">使用Winhex进行数据恢复（3）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-11-28T07:23:53.000Z" title="发表于 2019-11-28 15:23:53">2019-11-28</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/blog/categories/Winhex%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D%E6%95%99%E7%A8%8B/">Winhex数据恢复教程</a></span></div><div class="content">
-  97f62f7c146536b94bdaaa3b99ecafea32c9ec96523423e9ade29b91f29e85a217cd3425e02eb9e9d69756e4346be546c1bbf08bf07241f48b0053dfac6a287f73279282e96c5c6da5c5050a501ebd0c231ac250b202a3616a5455b8f7b18ce612bdaff9e19dae5040056d8480a384fc68b8b632e4cc6fa6dfa2885910c084a393ff5cf6bb7e051c5f245d44b0c736014186472e5efbccc9251c737d5ba7154a341896c650a1bf47fae248b5fb539290ccdbc62b29f9f1ea9c150a326a42f5b1c6806a7e1b7ab10e38320ed8ad59050295398cda919b14855c7de19c024fd5d7881880d7b2c53d50c3237bc1ca26611b0ccab8a0878d3216c ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/blog/posts/102848cd.html" title="实用的数据恢复软件">实用的数据恢复软件</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-11-24T07:50:27.000Z" title="发表于 2019-11-24 15:50:27">2019-11-24</time></span></div><div class="content">前言在数据恢复的过程中，我们常常需要使用不同的工具，以下是我常用的数据恢复软件
+在数据解释器中的32Bit栏中修改数值即可修改该 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/blog/posts/ea54819e.html" title="使用Winhex进行数据恢复（3）">使用Winhex进行数据恢复（3）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-11-28T07:23:53.000Z" title="发表于 2019-11-28 15:23:53">2019-11-28</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/blog/categories/Winhex%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D%E6%95%99%E7%A8%8B/">Winhex数据恢复教程</a></span></div><div class="content">前言现在，你已经学会了简单的修复MBR，迈出了数据恢复的第一步。接下来，我们将了解到 FAT32 格式的分区是如何工作的。
+
+你可以在 http://winhex.baklib.com 中查看所有例题文件
+题库密码：im0o.top
+
+知识点总览
+FAT32分区构成
+实例：导出损坏分区FAT32中的文件
+实例：恢复FAT32分区（手动填写FAT32分区的DBR）
+EBR的组成
+实例：恢复扩展分区中的FAT32分区
+
+
+
+FAT32 分区的构成​    FAT32 文件系统是从微软Windows 95 系统的 OSR2 版本开始使用的，它能够支持大于32MB小于32GB的分区。虽然第三方的格式化程序可以把超过32GB的分区格式化为FAT32，但微软自身的系统不允许将大于32GB的分区格式化为FAT32文件系统。
+​    FAT32文件系统由保留扇区（包含DBR以及其备份等），FAT表1，FAT表2，数据区四个部分组成，下图为其结构示意图：
+
+DBR及其保留扇区​    FAT32文件系统的DBR开始于其第一个扇区，由5个部分组成，分别为跳转指令、OEM代号、BPB、引导程序和结束标志， ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/blog/posts/102848cd.html" title="实用的数据恢复软件">实用的数据恢复软件</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-11-24T07:50:27.000Z" title="发表于 2019-11-24 15:50:27">2019-11-24</time></span></div><div class="content">前言在数据恢复的过程中，我们常常需要使用不同的工具，以下是我常用的数据恢复软件
 
 DiskGenius
 Winhex
@@ -364,8 +380,108 @@ DG是一款方便的分区工具，支持2种分区结构（MBR与GPT），在�
     
   
 
-</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/blog/posts/52e8e6fb.html" title="使用Winhex进行数据恢复（2）">使用Winhex进行数据恢复（2）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-11-17T03:44:41.000Z" title="发表于 2019-11-17 11:44:41">2019-11-17</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/blog/categories/Winhex%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D%E6%95%99%E7%A8%8B/">Winhex数据恢复教程</a></span></div><div class="content">
-  97f62f7c146536b94bdaaa3b99ecafea32c9ec96523423e9ade29b91f29e85a217cd3425e02eb9e9d69756e4346be546c1bbf08bf07241f48b0053dfac6a287f73279282e96c5c6da5c5050a501ebd0c231ac250b202a3616a5455b8f7b18ce65c897dc3ee427e4791f4bcc10f58105c24fad995ce53441009ecda029f177aef82851531922a22bae1614ad4fff68e6014caca8765f9cf657ad24968bb240eef766aab37d2d2b4ec35ccd61bcd7686fdf27315ab76d7d22acf2466d0d08d4d3fbafeafdf79161867fff37bf2e5666d6c7006609ad6a8ec96aacd514062d2b14a6cf2cfb5725d1ea767bb3c9e43fee2a1cd231093146117b7d ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><a class="extend next" rel="next" href="/blog/page/2/"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://gitee.com/im0o/photobed/raw/master/img/20210228081055.jpg" onerror="this.onerror=null;this.src='/blog/img/friend_404.gif'" alt="avatar"/><div class="author-info__name"> 0o酱</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/blog/archives/"><div class="headline">文章</div><div class="length-num">14</div></a></div><div class="card-info-data-item is-center"><a href="/blog/tags/"><div class="headline">标签</div><div class="length-num">26</div></a></div><div class="card-info-data-item is-center"><a href="/blog/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/0ojixueseno0"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">新站点成立
+</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/blog/posts/52e8e6fb.html" title="使用Winhex进行数据恢复（2）">使用Winhex进行数据恢复（2）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-11-17T03:44:41.000Z" title="发表于 2019-11-17 11:44:41">2019-11-17</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/blog/categories/Winhex%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D%E6%95%99%E7%A8%8B/">Winhex数据恢复教程</a></span></div><div class="content">前言在上一篇文章后，我们了解到了Winhex是什么，以及Winhex的快捷键等。
+本篇，我们将正式使用Winhex进行简单的分区恢复。
+
+你可以在 http://winhex.baklib.com 中查看所有例题文件
+题库密码：im0o.top
+
+知识点总览
+Winhex 窗口使用介绍
+实例：填写MBR
+什么是 DBR
+主分区与扩展分区
+
+
+
+Winhex窗口使用介绍
+
+文件类功能
+
+
+
+
+功能名称
+作用
+
+
+
+新建
+新建一个文件（可以自定义大小，导出文件时可以自定义扩展名）
+
+
+打开
+打开一个文件
+
+
+保存
+保存更改
+
+
+创建磁盘镜像
+为一个分区/磁盘创建镜像
+
+
+打印
+将范围内的二进制数据导出为*.xps格式的文档
+
+
+属性
+查看一个文件的属性
+
+
+打开文件夹
+打开一个文件夹进行编辑
+
+
+
+编辑类功能
+
+
+
+
+功能名称
+作用
+
+
+
+撤销
+撤销上一次的操作
+
+
+复制选区
+复制选定的区域
+
+
+粘贴选区
+将刚刚复制的内容粘贴
+
+
+写入剪贴板
+将剪贴板的数据写入
+
+
+叠加扇区
+叠加扇区
+
+
+修改数据
+对选定的数据批量操作（动刀子）
+
+
+
+查找类功能
+
+
+
+
+功能名称
+作用
+
+
+
+同步搜索
+ ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><a class="extend next" rel="next" href="/blog/page/2/"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://gitee.com/im0o/photobed/raw/master/img/20210228081055.jpg" onerror="this.onerror=null;this.src='/blog/img/friend_404.gif'" alt="avatar"/><div class="author-info__name"> 0o酱</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/blog/archives/"><div class="headline">文章</div><div class="length-num">14</div></a></div><div class="card-info-data-item is-center"><a href="/blog/tags/"><div class="headline">标签</div><div class="length-num">26</div></a></div><div class="card-info-data-item is-center"><a href="/blog/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/0ojixueseno0"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">新站点成立
  Welcome to my site.</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/blog/posts/39c0dcf5.html" title="Discuz日记 - 更换域名">Discuz日记 - 更换域名</a><time datetime="2020-08-26T21:55:07.000Z" title="发表于 2020-08-27 05:55:07">2020-08-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/blog/posts/8b38d942.html" title="Skript 功能体验服">Skript 功能体验服</a><time datetime="2020-02-12T05:30:23.000Z" title="发表于 2020-02-12 13:30:23">2020-02-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/blog/posts/deee77a9.html" title="使用abbrlink插件来缩短文章链接">使用abbrlink插件来缩短文章链接</a><time datetime="2020-02-12T02:10:09.000Z" title="发表于 2020-02-12 10:10:09">2020-02-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/blog/posts/4cbde4df.html" title="UltraEconomy -- 全新的货币系统">UltraEconomy -- 全新的货币系统</a><time datetime="2020-02-09T23:32:56.000Z" title="发表于 2020-02-10 07:32:56">2020-02-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/blog/posts/56d51092.html" title="JPEG与PNG图片隐藏信息传递术">JPEG与PNG图片隐藏信息传递术</a><time datetime="2019-12-22T03:27:52.000Z" title="发表于 2019-12-22 11:27:52">2019-12-22</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
             <i class="fas fa-folder-open"></i>
             <span>分类</span>
@@ -373,4 +489,4 @@ DG是一款方便的分区工具，支持2种分区结构（MBR与GPT），在�
             </div>
             <ul class="card-category-list" id="aside-cat-list">
             <li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/Hexo/"><span class="card-category-list-name">Hexo</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/Winhex%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/"><span class="card-category-list-name">Winhex数据恢复</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/Winhex%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D%E6%95%99%E7%A8%8B/"><span class="card-category-list-name">Winhex数据恢复教程</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/discuz%E6%97%A5%E8%AE%B0/"><span class="card-category-list-name">discuz日记</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8A%80%E5%B7%A7%E5%90%88%E9%9B%86/"><span class="card-category-list-name">一些小技巧合集</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/blog/categories/%E6%88%91%E7%9A%84Skript%E6%97%85%E9%80%94/"><span class="card-category-list-name">我的Skript旅途</span><span class="card-category-list-count">4</span></a></li>
-            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/blog/tags/DiskGenius/" style="font-size: 1.1em; color: #999">DiskGenius</a> <a href="/blog/tags/FAT32/" style="font-size: 1.1em; color: #999">FAT32</a> <a href="/blog/tags/GPT%E5%88%86%E5%8C%BA/" style="font-size: 1.1em; color: #999">GPT分区</a> <a href="/blog/tags/Hexo/" style="font-size: 1.23em; color: #999ea6">Hexo</a> <a href="/blog/tags/Hexo%E5%8D%9A%E5%AE%A2%E6%8F%92%E4%BB%B6/" style="font-size: 1.1em; color: #999">Hexo博客插件</a> <a href="/blog/tags/JPG%E6%96%87%E4%BB%B6/" style="font-size: 1.1em; color: #999">JPG文件</a> <a href="/blog/tags/MBR%E5%88%86%E5%8C%BA/" style="font-size: 1.1em; color: #999">MBR分区</a> <a href="/blog/tags/R-Studio/" style="font-size: 1.1em; color: #999">R-Studio</a> <a href="/blog/tags/Skript/" style="font-size: 1.37em; color: #99a4b2">Skript</a> <a href="/blog/tags/Windows%E7%B3%BB%E7%BB%9F/" style="font-size: 1.1em; color: #999">Windows系统</a> <a href="/blog/tags/Winhex/" style="font-size: 1.5em; color: #99a9bf">Winhex</a> <a href="/blog/tags/baklib/" style="font-size: 1.1em; color: #999">baklib</a> <a href="/blog/tags/cloudflare/" style="font-size: 1.1em; color: #999">cloudflare</a> <a href="/blog/tags/discuz/" style="font-size: 1.1em; color: #999">discuz!</a> <a href="/blog/tags/http/" style="font-size: 1.1em; color: #999">http</a> <a href="/blog/tags/https/" style="font-size: 1.1em; color: #999">https</a> <a href="/blog/tags/minecraft/" style="font-size: 1.1em; color: #999">minecraft</a> <a href="/blog/tags/skript/" style="font-size: 1.1em; color: #999">skript</a> <a href="/blog/tags/%E4%BC%98%E5%8C%96%E5%8D%9A%E5%AE%A2/" style="font-size: 1.1em; color: #999">优化博客</a> <a href="/blog/tags/%E5%8A%A0%E5%AF%86%E4%BC%A0%E8%BE%93/" style="font-size: 1.1em; color: #999">加密传输</a> <a href="/blog/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 1.1em; color: #999">博客</a> <a href="/blog/tags/%E5%9F%9F%E5%90%8D/" style="font-size: 1.1em; color: #999">域名</a> <a href="/blog/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/" style="font-size: 1.1em; color: #999">小技巧</a> <a href="/blog/tags/%E6%81%A2%E5%A4%8D%E5%88%86%E5%8C%BA/" style="font-size: 1.1em; color: #999">恢复分区</a> <a href="/blog/tags/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C/" style="font-size: 1.1em; color: #999">我的世界</a> <a href="/blog/tags/%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/" style="font-size: 1.5em; color: #99a9bf">数据恢复</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2020/08/"><span class="card-archive-list-date">八月 2020</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2020/02/"><span class="card-archive-list-date">二月 2020</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2019/12/"><span class="card-archive-list-date">十二月 2019</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2019/11/"><span class="card-archive-list-date">十一月 2019</span><span class="card-archive-list-count">6</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2019/08/"><span class="card-archive-list-date">八月 2019</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2019/07/"><span class="card-archive-list-date">七月 2019</span><span class="card-archive-list-count">1</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">14</div></div><div class="webinfo-item"><div class="item-name">已运行时间 :</div><div class="item-count" id="runtimeshow" data-publishDate="2019-11-24T16:00:00.000Z"></div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2021-05-10T09:47:22.055Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By  0o酱</div><div class="framework-info"></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/blog/js/utils.js"></script><script src="/blog/js/main.js"></script><script src="/blog/js/tw_cn.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/blog/tags/DiskGenius/" style="font-size: 1.1em; color: #999">DiskGenius</a> <a href="/blog/tags/FAT32/" style="font-size: 1.1em; color: #999">FAT32</a> <a href="/blog/tags/GPT%E5%88%86%E5%8C%BA/" style="font-size: 1.1em; color: #999">GPT分区</a> <a href="/blog/tags/Hexo/" style="font-size: 1.23em; color: #999ea6">Hexo</a> <a href="/blog/tags/Hexo%E5%8D%9A%E5%AE%A2%E6%8F%92%E4%BB%B6/" style="font-size: 1.1em; color: #999">Hexo博客插件</a> <a href="/blog/tags/JPG%E6%96%87%E4%BB%B6/" style="font-size: 1.1em; color: #999">JPG文件</a> <a href="/blog/tags/MBR%E5%88%86%E5%8C%BA/" style="font-size: 1.1em; color: #999">MBR分区</a> <a href="/blog/tags/R-Studio/" style="font-size: 1.1em; color: #999">R-Studio</a> <a href="/blog/tags/Skript/" style="font-size: 1.37em; color: #99a4b2">Skript</a> <a href="/blog/tags/Windows%E7%B3%BB%E7%BB%9F/" style="font-size: 1.1em; color: #999">Windows系统</a> <a href="/blog/tags/Winhex/" style="font-size: 1.5em; color: #99a9bf">Winhex</a> <a href="/blog/tags/baklib/" style="font-size: 1.1em; color: #999">baklib</a> <a href="/blog/tags/cloudflare/" style="font-size: 1.1em; color: #999">cloudflare</a> <a href="/blog/tags/discuz/" style="font-size: 1.1em; color: #999">discuz!</a> <a href="/blog/tags/http/" style="font-size: 1.1em; color: #999">http</a> <a href="/blog/tags/https/" style="font-size: 1.1em; color: #999">https</a> <a href="/blog/tags/minecraft/" style="font-size: 1.1em; color: #999">minecraft</a> <a href="/blog/tags/skript/" style="font-size: 1.1em; color: #999">skript</a> <a href="/blog/tags/%E4%BC%98%E5%8C%96%E5%8D%9A%E5%AE%A2/" style="font-size: 1.1em; color: #999">优化博客</a> <a href="/blog/tags/%E5%8A%A0%E5%AF%86%E4%BC%A0%E8%BE%93/" style="font-size: 1.1em; color: #999">加密传输</a> <a href="/blog/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 1.1em; color: #999">博客</a> <a href="/blog/tags/%E5%9F%9F%E5%90%8D/" style="font-size: 1.1em; color: #999">域名</a> <a href="/blog/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/" style="font-size: 1.1em; color: #999">小技巧</a> <a href="/blog/tags/%E6%81%A2%E5%A4%8D%E5%88%86%E5%8C%BA/" style="font-size: 1.1em; color: #999">恢复分区</a> <a href="/blog/tags/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C/" style="font-size: 1.1em; color: #999">我的世界</a> <a href="/blog/tags/%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/" style="font-size: 1.5em; color: #99a9bf">数据恢复</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2020/08/"><span class="card-archive-list-date">八月 2020</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2020/02/"><span class="card-archive-list-date">二月 2020</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2019/12/"><span class="card-archive-list-date">十二月 2019</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2019/11/"><span class="card-archive-list-date">十一月 2019</span><span class="card-archive-list-count">6</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2019/08/"><span class="card-archive-list-date">八月 2019</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/blog/archives/2019/07/"><span class="card-archive-list-date">七月 2019</span><span class="card-archive-list-count">1</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">14</div></div><div class="webinfo-item"><div class="item-name">已运行时间 :</div><div class="item-count" id="runtimeshow" data-publishDate="2019-11-24T16:00:00.000Z"></div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2021-05-10T10:15:13.410Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By  0o酱</div><div class="framework-info"></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/blog/js/utils.js"></script><script src="/blog/js/main.js"></script><script src="/blog/js/tw_cn.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
