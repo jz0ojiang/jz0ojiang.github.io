@@ -26,7 +26,8 @@ for (var i = 0; i < num; i++) {
 };
 //绘制图片
 var img = new Image();
-img.src = "canvas/smile.png"
+img.src = "canvas/heart.png"
+// img.src = "canvas/smile.png"
 function draw() {
     
     context.clearRect(0, 0, w, h); //清空画布
@@ -36,7 +37,7 @@ function draw() {
         // context.fillStyle = "rgba(255,255,255,0.5)"; //设定填充方式为白色半透明
         // context.arc(snow.x, snow.y, snow.r, 0, Math.PI * 2); //根据属性绘制圆形
         // context.moveTo(snow.x, snow.y); //画笔移动到指定坐标处
-        context.drawImage(img,snow.x,snow.y,60,60);
+        context.drawImage(img,snow.x,snow.y,30,30);
     }
     context.fill(); //填充路径
     //雪片落下
