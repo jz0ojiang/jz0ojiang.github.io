@@ -24,6 +24,21 @@ body{
   justify-content: center;
 }
 
+.banner{
+  display: flex;
+  position: fixed;
+  bottom: -1px;
+  left: 0%;
+  max-width: 100%;
+  /* max-height: 60%; */
+  overflow:hidden;
+  z-index: -1;
+}
+
+.banner img {
+  width: 100%;
+}
+
 .profile-card{
   width: 400px;
   text-align: center;

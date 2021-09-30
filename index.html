@@ -7,10 +7,11 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"/>
   <link rel="stylesheet" href="style.css">
   <link rel="shortcut icon" href="https://gitee.com/im0o/photobed/raw/master/img/20200727163358.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
   <!-- <link rel="stylesheet" href="/particle/canvas.css"> -->
 </head>
 <body>
-  <!-- <canvas id="canvas"></canvas> -->
+  <canvas id="canvas"></canvas>
   <div class="profile-card">
     <div class="card-header">
       <div class="pic">
@@ -22,7 +23,7 @@
         <a href="https://t.me/jz0ojiang" class="fab fa-telegram-plane" title="telegram"></a>
         <a href="https://twitter.com/0ojixueseno0" class="fab fa-twitter" title="twitter"></a>
         <a href="https://github.com/0ojixueseno0" class="fab fa-github" title="github"></a>
-        <a href="javascript:qq()" class="fab fa-qq" title="qq"></a>
+        <a @click="tencent" class="fab fa-qq" title="qq"></a>
         <a href="https://afdian.net/@jz0ojiang" class="fas fa-bolt" title="afadian"></a>
         <a href="https://trash-station.github.io/" class="far fa-trash-alt" title="github group"></a>
       </div>
@@ -31,8 +32,8 @@
     <div class="card-footer">
       <div class="numbers">
         <div class="item">
-          <span>19+</span>
-          Projects
+          <span>24+</span>
+          Repositories
         </div>
         <div class="border"></div>
         <div class="item">
@@ -45,24 +46,36 @@
           Heart
         </div> -->
       </div>
-    </div> 
-    
+    </div>
+    <div class="banner">
+      <img src="src/tiananmen.png" title="tiananmen"/>
+    </div>
   </div>
+  <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script> -->
+  <!-- 生产环境版本，优化了尺寸和速度 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <!-- 引入组件库 -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
   <script>
-
-    function qq() {
-      window.alert = function(name){
-      var iframe = document.createElement("IFRAME");
-      iframe.style.display="none";
-      iframe.setAttribute("src", 'data:text/plain');
-      document.documentElement.appendChild(iframe);
-      window.frames[0].window.alert(name);
-      iframe.parentNode.removeChild(iframe);
-      } 
-
-      alert('QQ-Num: 2773173293\nQid: furry0o\n添加请备注来意');
-    }
+    new Vue({
+      el: ".profile-card",
+      methods: {
+        tencent() {
+          const h = this.$createElement;
+          this.$notify.info({
+            title: 'QQ',
+            message: h('p',null,[
+              h('p',null,'QQ: 2773173293'),
+              h('p',null,'Qid: furry0o'),
+              h('i',null,'添加请备注来意')
+            ])
+          });
+        }
+      }
+    })
   </script>
-<!-- <script src="canvas/script.js"></script> -->
+<script src="canvas/script.js"></script>
 </body>
 </html>
