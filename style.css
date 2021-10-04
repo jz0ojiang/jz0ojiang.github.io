@@ -24,6 +24,13 @@ body{
   justify-content: center;
 }
 
+.moeicp {
+  margin-top: 20px;
+}
+.moeicp a {
+  color: #74b9ff;
+}
+
 .banner{
   display: flex;
   position: fixed;
@@ -48,7 +55,7 @@ body{
 
 .card-header{
   background: #2c3a47;
-  padding: 60px 40px;
+  padding: 50px 40px;
 }
 
 .pic{
