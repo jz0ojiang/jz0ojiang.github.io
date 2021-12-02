@@ -17,7 +17,7 @@ canvas{
 
 body{
   height: 100vh;
-  background: url(https://gitee.com/im0o/photobed/raw/master/img/20210228080846.jpg) no-repeat center;
+  background: url(https://cdn.jsdelivr.net/gh/0ojixueseno0/image@main/files/202112021227073.jpg) no-repeat center;
   background-size: cover;
   display: flex;
   align-items: center;
@@ -54,7 +54,7 @@ body{
 }
 
 .card-header{
-  background: #2c3a47;
+  background: #2D2E3F;
   padding: 50px 40px;
 }
 
