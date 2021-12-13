@@ -4,6 +4,9 @@
   font-family: "Ubuntu", sans-serif;
   box-sizing: border-box;
   text-decoration: none;
+  /* 12-13 */
+  filter: grayscale(.95);
+  -webkit-filter: grayscale(.95);
 }
 
 canvas{
