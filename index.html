@@ -98,9 +98,7 @@
           })
           axios.get("https://blog.im0o.top/api/post-count/")
           .then(res => {
-            console.log(res);
-            console.log(res.data);
-            this.posts = JSON.parse(res.data).data;
+            this.posts = res.data.data;
           })
         }
       },
