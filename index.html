@@ -11,11 +11,11 @@
   <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
   <!-- <link rel="stylesheet" href="/particle/canvas.css"> -->
   <link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
-  <script data-ad-client="ca-pub-3350696623728919" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- <script data-ad-client="ca-pub-3350696623728919" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
   <script src="//instant.page/5.1.0" type="module" integrity="sha384-by67kQnR+pyfy8yWP4kPO12fHKRLHZPfEsiSXR8u2IKcTdxD805MGUXBzVPnkLHw"></script>
 </head>
 <body>
-  <canvas id="canvas"></canvas>
+  <!-- <canvas id="canvas"></canvas> -->
   <div class="profile-card">
     <div class="card-header">
       <div class="shake">
@@ -43,12 +43,12 @@
     <div class="card-footer">
       <div class="numbers">
         <div class="item">
-          <span>24+</span>
+          <span>{{ repos }}</span>
           Repositories
         </div>
         <div class="border"></div>
         <div class="item">
-          <span>25</span>
+          <span>{{ posts }}</span>
           Posts
         </div>
         <!-- <div class="border"></div>
@@ -68,10 +68,17 @@
   <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
   <!-- 引入组件库 -->
   <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
   <script>
     new Vue({
       el: ".profile-card",
+      data() {
+        return {
+          repos: 0,
+          posts: 0
+        }
+      },
       methods: {
         tencent() {
           const h = this.$createElement;
@@ -83,7 +90,20 @@
               h('i',null,'添加请备注来意')
             ])
           });
+        },
+        getInfoData() {
+          axios.get("https://api.github.com/users/0ojixueseno0")
+          .then(res => {
+            this.repos = res.data.public_repos;
+          })
+          axios.get("https://blog.im0o.top/api/post-count/")
+          .then(res => {
+            this.posts = JSON.parse(res.data).data;
+          })
         }
+      },
+      mounted() {
+        this.getInfoData();
       }
     })
   </script>
