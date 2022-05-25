@@ -2,7 +2,7 @@
 //获取画布对象
 var canvas = document.getElementById("canvas");
 //设置画布为2D方式
-var context = canvas.getContext("2d");
+// var context = canvas.getContext("2d");
 
 //获取浏览器窗口的宽度和高度
 var w = window.innerWidth;
