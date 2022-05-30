@@ -65,7 +65,11 @@
   <!-- 开发环境版本，包含了有帮助的命令行警告 -->
   <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script> -->
   <!-- 生产环境版本，优化了尺寸和速度 -->
-  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2"></script> -->
+  <script src="https://unpkg.com/vue@2.6.14/dist/vue.min.js"></script>
+  <script>
+    window.Vue || document.write('<script src="https://cdn.jsdelivr.net/npm/vue@2"><\/script>');
+  </script>
   <!-- 引入组件库 -->
   <script src="https://unpkg.com/element-ui/lib/index.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -96,9 +100,9 @@
           .then(res => {
             this.repos = res.data.public_repos;
           })
-          axios.get("https://blog.im0o.top/api/post-count/")
+          axios.get("https://blog.im0o.top/api/getPostCount/")
           .then(res => {
-            this.posts = res.data.data;
+            this.posts = res.data.data.count;
           })
         }
       },
@@ -107,6 +111,6 @@
       }
     })
   </script>
-<script src="canvas/script.js"></script>
+<!-- <script src="canvas/script.js"></script> -->
 </body>
 </html>
