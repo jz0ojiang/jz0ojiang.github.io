@@ -1,116 +1,14 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Here is 0o酱</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"/>
-  <!-- <link href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css" rel="stylesheet"> -->
-  <link rel="stylesheet" href="style.css">
-  <link rel="shortcut icon" href="https://image.im0o.top/files/202112021204213.jpg" type="image/x-icon">
-  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
-  <!-- <link rel="stylesheet" href="/particle/canvas.css"> -->
-  <link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
-  <!-- <script data-ad-client="ca-pub-3350696623728919" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
-  <script src="//instant.page/5.1.0" type="module" integrity="sha384-by67kQnR+pyfy8yWP4kPO12fHKRLHZPfEsiSXR8u2IKcTdxD805MGUXBzVPnkLHw"></script>
-</head>
-<body>
-  <!-- <canvas id="canvas"></canvas> -->
-  <div class="profile-card">
-    <div class="card-header">
-      <div class="shake">
-        <div class="pic">
-          <img src="https://image.im0o.top/files/202112021204213.jpg" alt="">
-        </div>
-      </div>
-      <div class="name">0o酱</div>
-      <div class="desc">Programmer & Developer</div>
-      <div class="sm">
-        <a href="https://t.me/jz0ojiang" class="fab fa-telegram-plane" title="telegram"></a>
-        <a href="https://twitter.com/0ojixueseno0" class="fab fa-twitter" title="twitter"></a>
-        <a href="https://github.com/0ojixueseno0" class="fab fa-github" title="github"></a>
-        <a @click="tencent" class="fab fa-qq" title="qq"></a>
-        <a href="https://afdian.net/@jz0ojiang" class="fas fa-bolt" title="afadian"></a>
-        <a href="https://trash-station.github.io/" class="far fa-trash-alt" title="github group"></a>
-      </div>
-      <div class="shake-rotate">
-        <a href="https://blog.im0o.top/" class="contact-btn" title="To my blog">My blog</a>
-      </div>
-      <div class="moeicp">
-        <a href="https://icp.gov.moe/?keyword=20210216" target="_blank">✮萌ICP备20210216号✮</a>
-      </div>
-    </div>
-    <div class="card-footer">
-      <div class="numbers">
-        <div class="item">
-          <span>{{ repos }}</span>
-          Repositories
-        </div>
-        <div class="border"></div>
-        <div class="item">
-          <span>{{ posts }}</span>
-          Posts
-        </div>
-        <!-- <div class="border"></div>
-        <div class="item">
-          <span>1</span>
-          Heart
-        </div> -->
-      </div>
-    </div>
-    <!-- <div class="banner">
-      <img src="https://gitee.com/im0o/photobed/raw/master/img/20211001003853.png" title="tiananmen"/>
-    </div> -->
-  </div>
-  <!-- 开发环境版本，包含了有帮助的命令行警告 -->
-  <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script> -->
-  <!-- 生产环境版本，优化了尺寸和速度 -->
-  <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2"></script> -->
-  <script src="https://unpkg.com/vue@2.6.14/dist/vue.min.js"></script>
-  <script>
-    window.Vue || document.write('<script src="https://cdn.jsdelivr.net/npm/vue@2"><\/script>');
-  </script>
-  <!-- 引入组件库 -->
-  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
-  <script>
-    new Vue({
-      el: ".profile-card",
-      data() {
-        return {
-          repos: 0,
-          posts: 0
-        }
-      },
-      methods: {
-        tencent() {
-          const h = this.$createElement;
-          this.$notify.info({
-            title: 'QQ',
-            message: h('p',null,[
-              h('p',null,'QQ: 2773173293'),
-              h('p',null,'Qid: furry0o'),
-              h('i',null,'添加请备注来意')
-            ])
-          });
-        },
-        getInfoData() {
-          axios.get("https://api.github.com/users/0ojixueseno0")
-          .then(res => {
-            this.repos = res.data.public_repos;
-          })
-          axios.get("https://blog.im0o.top/api/getPostCount/")
-          .then(res => {
-            this.posts = res.data.data.count;
-          })
-        }
-      },
-      mounted() {
-        this.getInfoData();
-      }
-    })
-  </script>
-<!-- <script src="canvas/script.js"></script> -->
-</body>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- <link rel="icon" type="image/svg+xml" href="/vite.svg" /> -->
+    <link rel="shortcut icon" href="https://image.im0o.top/files/202112021204213.jpg" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>0o酱 - 个人主页 | 柴兽居</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>
