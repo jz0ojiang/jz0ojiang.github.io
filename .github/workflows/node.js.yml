@@ -1,42 +1,40 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+# 该workflow的名称，可以随意填写
+name: Build And Deploy To Github Pages
 
-name: Build and Deploy to Github Page
-
+# workflow的触发事件，这里代表main分支的push事件触发
 on:
   push:
-    branches: [ "v2" ]
+    branches: [ v2 ]
 
+# 任务
 jobs:
+  # build-and-deploy 为任务的ID
   build-and-deploy:
-
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [12.x, 14.x, 16.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    # 运行所需要的环境
+    runs-on: ubuntu-latest 
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - name: Build and Deploy
-      # 构建发布 Github pages
-      uses: JamesIves/github-pages-deploy-action@releases/v2
-      # 该步骤所需的环境变量
-      env:
-        ACCESS_TOKEN: ${{ secrets.MY_TOKEN }}
-        # 在部署前要checkout的基本分支，默认是master
-        BASE_BRANCH: v2 # The branch the action should deploy from.
-        # 指定部署的分支，默认是 gh-pages 分支
-        BRANCH: gh-pages # The branch the action should deploy to.
-        # 存储库中要部署的文件夹。
-        # 该步骤会将项目中 FOLDER 指定文件夹下的文件推送到 BRANCH 分支，作为Github Pages 部署的内容。
-        # Vue CLI默认打包到 dist 目录
-        FOLDER: dist # The folder the action should deploy.
-        # 在向 BRANCH 分支推送代码前，可以指定构建脚本
-        BUILD_SCRIPT: yarn install && yarn build # The build script the action should run prior to deploying.
+      # 步骤名
+      - name: Checkout
+        # 使用的actions脚本，这里是官方提供的获取源码脚本
+        uses: actions/checkout@v2.3.1
+        # 这个为使用 JamesIves/github-pages-deploy-action脚本所需要的配置
+        with:
+          persist-credentials: false
+
+      # 执行npm脚本打包项目
+      - name: Install and Build
+        run: |
+          yarn install
+          yarn build
+      
+      # 执行JamesIves/github-pages-deploy-action将项目发布到Github Pages
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@3.7.1
+        with:
+          # 该workflow需要操作repo，因此需要一个密钥，下面会讲到如何获取这个密钥
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          # 发布到的分支
+          BRANCH: gh-pages
+          # 要发布的文件夹
+          FOLDER: dist
