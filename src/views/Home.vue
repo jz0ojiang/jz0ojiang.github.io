@@ -67,13 +67,14 @@ axios.all([getRepo1(), getRepo2(), getPosts()])
           <i class="ri-mail-line"></i>
         </a>
         <a href="https://blog.im0o.top" class="toblog">看看博客 >></a>
+        <!-- <a href="https://blog.im0o.cn" class="toblog">看看博客 >></a> -->
       </div>
     </div>
     <div class="space"></div>
   </div>
   <div class="footer">
     <a href="https://icp.gov.moe/?keyword=20210216">萌ICP备20210216号</a>
-    <!-- <p>鄂ICP备 0000000 号</p> -->
+    <!-- <a href="https://beian.miit.gov.cn/" target="_blank">鄂ICP备2022014822号-1</a> -->
     <p class="line">&nbsp;|&nbsp;</p>
     <p>Copyright &copy; 2019 - percent <a href="#">0o酱</a> All Rights Reserved.</p>
   </div>
@@ -144,6 +145,7 @@ axios.all([getRepo1(), getRepo2(), getPosts()])
 .container {
   display: grid;
   // justify-content: space-evenly;
+  justify-items: center;
   grid-template-columns: 1fr 1fr clamp(0fr, 0.1fr, 0.2fr) 1fr 1fr;
   grid-row: 1fr;
   align-items: center;
