@@ -7,7 +7,7 @@ const repos = ref("获取中...");
 const posts = ref("获取中...");
 
 function getRepo1() {
-  return axios.get("https://api.github.com/users/0ojixueseno0")
+  return axios.get("https://api.github.com/users/jz0ojiang")
 }
 
 function getRepo2() {
@@ -18,16 +18,21 @@ function getPosts() {
   return axios.get("https://blog.im0o.top/api/getPostCount/")
 }
 
-axios.all([getRepo1(), getRepo2(), getPosts()])
+axios.all([getRepo1(), getRepo2()])
   .then(axios.spread((...responses) => {
     repos.value = responses[0].data.public_repos + responses[1].data.public_repos;
-    posts.value = responses[2].data.data.count;
   }))
   .catch(errors => {
     repos.value = "获取仓库数量失败";
-    posts.value = "获取文章数量失败";
     console.log(errors);
   })
+
+getPosts().then(res => {
+  posts.value = res.data.data.count;
+}).catch(err => {
+  posts.value = "获取文章数量失败";
+  console.log(err);
+})
 
 
 </script>
@@ -50,14 +55,14 @@ axios.all([getRepo1(), getRepo2(), getPosts()])
         <p>开源仓库数： {{ repos }}</p>
       </div>
       <div class="links">
-        <a href="https://github.com/0ojixueseno0" target="_blank" rel="noopener noreferrer" title="Github">
+        <a href="https://github.com/jz0ojiang" target="_blank" rel="noopener noreferrer" title="Github">
           <i class="ri-github-line"></i>
         </a>
         <a href="tencent://snsapp/?cmd=2&ver=1&uin=2773173293" target="_blank"
           rel="noopener noreferrer" title="QQ">
           <i class="ri-qq-line"></i>
         </a>
-        <a href="https://twitter.com/0ojixueseno0" target="_blank" rel="noopener noreferrer" title="Twitter">
+        <a href="https://twitter.com/jz0ojiang" target="_blank" rel="noopener noreferrer" title="Twitter">
           <i class="ri-twitter-line"></i>
         </a>
         <a href="https://t.me/@jz0ojiang" target="_blank" rel="noopener noreferrer" title="Telegram">
