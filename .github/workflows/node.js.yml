@@ -3,6 +3,12 @@ name: Build And Deploy To Github Pages
 
 # workflow的触发事件，这里代表main分支的push事件触发
 on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Target branch for the workflow'
+        required: true
+        default: 'main'
   push:
     branches: [ v2 ]
 
