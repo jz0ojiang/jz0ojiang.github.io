@@ -26,7 +26,6 @@ dist-ssr
 .vscode
 
 yarn.lock
-pnpm-lock.yaml
 
 deploy.sh
 deploy.ps1
