@@ -9,8 +9,8 @@ dependencies:
     specifier: ^1.6.0
     version: 1.6.0
   remixicon:
-    specifier: ^2.5.0
-    version: 2.5.0
+    specifier: ^4.2.0
+    version: 4.2.0
   sass:
     specifier: ^1.54.0
     version: 1.69.5
@@ -611,8 +611,8 @@ packages:
     dependencies:
       picomatch: 2.3.1
 
-  /remixicon@2.5.0:
-    resolution: {integrity: sha512-q54ra2QutYDZpuSnFjmeagmEiN9IMo56/zz5dDNitzKD23oFRw77cWo4TsrAdmdkPiEn8mxlrTqxnkujDbEGww==}
+  /remixicon@4.2.0:
+    resolution: {integrity: sha512-MF5wApNveRh3n0iMVM+lr2nSWrj/rBbSD2eWapuD9ReYRGs5naAUR1BqVBCHGqm286FIS6zwwmUf96QjHQ9l4w==}
     dev: false
 
   /resolve@1.22.8:
