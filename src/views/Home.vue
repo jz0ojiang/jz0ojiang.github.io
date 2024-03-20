@@ -2,9 +2,14 @@
 import qiochan from '../assets/qiochan.png'
 import { ref } from 'vue';
 import axios from 'axios';
+import afdianVue from "../components/afd.vue"
 
 const repos = ref("获取中...");
 const posts = ref("获取中...");
+
+const query = window.location.search;
+
+const isCn = window.location.href.includes('im0o.cn') || query.search('cn') !== -1;
 
 function getRepo1() {
   return axios.get("https://api.github.com/users/jz0ojiang")
@@ -62,24 +67,30 @@ getPosts().then(res => {
           rel="noopener noreferrer" title="QQ">
           <i class="ri-qq-line"></i>
         </a>
-        <a href="https://twitter.com/jz0ojiang" target="_blank" rel="noopener noreferrer" title="Twitter">
-          <i class="ri-twitter-line"></i>
+        <a href="https://twitter.com/jz0ojiang" target="_blank" rel="noopener noreferrer" title="X" v-if="!isCn">
+          <i class="ri-twitter-x-line"></i>
         </a>
-        <a href="https://t.me/@jz0ojiang" target="_blank" rel="noopener noreferrer" title="Telegram">
+        <a href="https://t.me/@jz0ojiang" target="_blank" rel="noopener noreferrer" title="Telegram" v-if="!isCn">
           <i class="ri-telegram-line"></i>
         </a>
         <a href="mailto:hi@im0o.top" title="Mail to me">
           <i class="ri-mail-line"></i>
         </a>
-        <a href="https://blog.im0o.top" class="toblog">看看博客 >></a>
-        <!-- <a href="https://blog.im0o.cn" class="toblog">看看博客 >></a> -->
+        <a href="https://afdian.net/@jz0ojiang" title="afdian" v-if="isCn">
+          <afdianVue />
+        </a>
+        <a href="https://afdian.net/@qiochan" title="afdian" v-else>
+          <afdianVue />
+        </a>
+        <a href="https://blog.im0o.cn" class="toblog" v-if="isCn">看看博客 >></a>
+        <a href="https://blog.im0o.top" class="toblog" v-else>看看博客 >></a>
       </div>
     </div>
     <div class="space"></div>
   </div>
   <div class="footer">
-    <a href="https://icp.gov.moe/?keyword=20210216">萌ICP备20210216号</a>
-    <!-- <a href="https://beian.miit.gov.cn/" target="_blank">鄂ICP备2022014822号-1</a> -->
+    <a href="https://beian.miit.gov.cn/" target="_blank" v-if="isCn">鄂ICP备2022014822号-1</a>
+    <a href="https://icp.gov.moe/?keyword=20210216" v-else>萌ICP备20210216号</a>
     <p class="line">&nbsp;|&nbsp;</p>
     <p>Copyright &copy; 2019 - percent <a href="#">0o酱</a> All Rights Reserved.</p>
   </div>
@@ -140,6 +151,8 @@ getPosts().then(res => {
     a {
       margin-right: .7rem;
       color: #000;
+      display: flex;
+      align-items: center;
     }
     .toblog {
       color: #F47F2C;
