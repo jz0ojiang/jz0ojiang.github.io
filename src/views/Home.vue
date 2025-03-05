@@ -45,17 +45,17 @@ function getPosts() {
 }
 
 axios.all([getRepo1(), getRepo2()])
-  .then(axios.spread((...responses) => {
+  .then(axios.spread((...responses: any[]) => {
     repos.value = responses[0].data.public_repos + responses[1].data.public_repos;
   }))
-  .catch(errors => {
+  .catch((errors: any) => {
     repos.value = "获取仓库数量失败";
     console.log(errors);
   })
 
-getPosts().then(res => {
+getPosts().then((res: { data: { data: { count: any; }; }; }) => {
   posts.value = res.data.data.count;
-}).catch(err => {
+}).catch((err: any) => {
   posts.value = "获取文章数量失败";
   console.log(err);
 })
@@ -89,7 +89,7 @@ const switch_theme = () => {
       <h1>0o酱</h1>
       <div class="desc">
         <p>互联网爱好者，从 2010 年开始接触计算机</p>
-        <p>比较没有主见的福瑞控，设定是 🐕柴犬+🦊狐狸</p>
+        <p>设定是 🐕柴犬+🦊狐狸的福瑞控</p>
         <p>web 全栈工程师 | Vue.js | Go | Python</p>
         <p>已发表文章： {{ posts }}</p>
         <p>开源仓库数： {{ repos }}</p>
@@ -111,15 +111,15 @@ const switch_theme = () => {
         <a href="mailto:hi@im0o.top" title="Mail to me">
           <i class="ri-mail-line"></i>
         </a>
-        <a href="https://afdian.net/@jz0ojiang" title="afdian" v-if="isCn">
+        <!-- <a href="https://afdian.net/@jz0ojiang" title="afdian" v-if="isCn">
           <afdianVue />
-        </a>
+        </a> -->
         <!-- <a href="https://afdian.net/@qiochan" title="afdian" v-else> -->
-        <a href="https://afdian.net/@jz0ojiang" title="afdian" v-else>
+        <a href="https://afdian.net/@jz0ojiang" title="afdian" v-if="!isCn">
           <afdianVue />
         </a>
-        <a href="https://blog.im0o.cn" class="toblog" v-if="isCn">看看博客 >></a>
-        <a href="https://blog.im0o.top" class="toblog" v-else>看看博客 >></a>
+        <!-- <a href="https://blog.im0o.cn" class="toblog" v-if="isCn">看看博客 >></a> -->
+        <a href="https://blog.im0o.top" class="toblog" v-if="!isCn">看看博客 >></a>
       </div>
     </div>
     <div class="space"></div>
