@@ -115,7 +115,7 @@ const switch_theme = () => {
           <afdianVue />
         </a> -->
         <!-- <a href="https://afdian.net/@qiochan" title="afdian" v-else> -->
-        <a href="https://afdian.net/@jz0ojiang" title="afdian" v-if="!isCn">
+        <a href="https://afdian.com/@jz0ojiang" title="afdian" v-if="!isCn">
           <afdianVue />
         </a>
         <!-- <a href="https://blog.im0o.cn" class="toblog" v-if="isCn">看看博客 >></a> -->
