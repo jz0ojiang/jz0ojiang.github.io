@@ -41,7 +41,7 @@ function getRepo2() {
 }
 
 function getPosts() {
-  return axios.get("https://blog.im0o.top/api/getPostCount/")
+  return axios.get("https://blog.im0o.top/api/content/info")
 }
 
 axios.all([getRepo1(), getRepo2()])
@@ -53,8 +53,8 @@ axios.all([getRepo1(), getRepo2()])
     console.log(errors);
   })
 
-getPosts().then((res: { data: { data: { count: any; }; }; }) => {
-  posts.value = res.data.data.count;
+getPosts().then((res: { data: { stats: { posts: number; }; }; }) => {
+  posts.value = String(res.data.stats.posts);
 }).catch((err: any) => {
   posts.value = "获取文章数量失败";
   console.log(err);
@@ -98,7 +98,7 @@ const switch_theme = () => {
         <a href="https://github.com/jz0ojiang" target="_blank" rel="noopener noreferrer" title="Github">
           <i class="ri-github-line"></i>
         </a>
-        <a href="tencent://snsapp/?cmd=2&ver=1&uin=2773173293" target="_blank"
+        <a href="https://qm.qq.com/cgi-bin/qm/qr?k=kX4YlnU_UkxU0Iudx3Tst8g-8nvbK3Mv" target="_blank"
           rel="noopener noreferrer" title="QQ">
           <i class="ri-qq-line"></i>
         </a>
