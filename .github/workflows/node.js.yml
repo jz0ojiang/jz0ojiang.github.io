@@ -32,10 +32,12 @@ jobs:
       - name: pnpm-setup
         uses: pnpm/action-setup@v3
         with:
-          version: 8
+          # 和 pnpm-lock.yaml 的 lockfileVersion 9.0 对齐。版本对不上时 pnpm 会忽略 lockfile 重新解析，
+          # 装到更新的 vue，老的 vue-tsc 0.38 类型检查就过不去
+          version: 9
 
       - name: Install
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
       - name: Build
         run: pnpm run build
       
